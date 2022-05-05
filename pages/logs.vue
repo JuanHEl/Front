@@ -9,7 +9,7 @@
     ></b-table>
     <div id="formLogs">
       <div>
-        <p>Filtros</p>
+        <p style="color:white;">Filtros</p>
       </div>
       <div id="formsInput">
         <b-form-input
@@ -37,7 +37,7 @@
           :options="opcionesEstatus"
         ></b-form-select>
       </div>
-      <b-button block pill variant="outline-primary">Buscar</b-button>
+      <b-button block pill variant="primary">Buscar</b-button>
     </div>
   </div>
 </template>
@@ -135,14 +135,15 @@ export default {
   display: flex;
 }
 #tablalogs {
-  color: white;
+  color: black;
   width: 70%;
   margin: 2px;
+  background-color: whitesmoke;
 }
 
 #formLogs {
   width: 30%;
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
   margin: 2px;
   padding: 5px;
   border-radius: 10px;
