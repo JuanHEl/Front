@@ -11,15 +11,33 @@
       <div>
         <p>Filtros</p>
       </div>
-      <div id="formsIput">
+      <div id="formsInput">
         <b-form-input
           id="input-1"
           type="text"
           placeholder="Id"
           required
+          class="mb-2"
         ></b-form-input>
-        <b-form-select v-model="selected" :options="opciones"></b-form-select>
+        <b-form-select
+          v-model="form.servicio"
+          :options="opciones"
+          class="mb-2"
+        ></b-form-select>
+        <b-form-datepicker
+          v-model="form.fechaI"
+          class="mb-2"
+        ></b-form-datepicker>
+        <b-form-datepicker
+          v-model="form.fechaF"
+          class="mb-2"
+        ></b-form-datepicker>
+        <b-form-select
+          v-model="form.servicio"
+          :options="opcionesEstatus"
+        ></b-form-select>
       </div>
+      <b-button block pill variant="outline-primary">Buscar</b-button>
     </div>
   </div>
 </template>
@@ -29,7 +47,21 @@ export default {
   data() {
     return {
       selected: null,
-      opciones:[{ value: null, text: 'Selecciona una opción' },],
+      opciones: [
+        { value: null, text: "Selecciona un servicio" },
+        { value: 1, text: "Servicio 1" },
+      ],
+      opcionesEstatus: [
+        { value: null, text: "Selecciona un estatus" },
+        { value: 1, text: "Estatus 1" },
+      ],
+      form: {
+        id: null,
+        servicio: null,
+        fechaI: null,
+        fechaF: null,
+        estatus: null,
+      },
       fields: [
         {
           key: "idLogs",
@@ -105,15 +137,20 @@ export default {
 #tablalogs {
   color: white;
   width: 70%;
+  margin: 2px;
 }
 
 #formLogs {
   width: 30%;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
+  margin: 2px;
+  padding: 5px;
+  border-radius: 10px;
+  min-height: 400px;
 }
 
-#formsInput{
-  margin-bottom: 55px;
-  background-color: aqua;
+#formsInput {
+  margin-bottom: 10px;
+  min-height: 70%;
 }
 </style>
