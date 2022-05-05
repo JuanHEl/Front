@@ -5,7 +5,7 @@
         <div class="wrapper">
             <div class="box0">
                 <li>
-                    <NuxtLink style="color:white" to="/home">Resumen</NuxtLink>
+                    <NuxtLink style="color:white" to="/resumen">Resumen</NuxtLink>
                 </li>
             </div>
             <div class="box2">
@@ -15,17 +15,17 @@
             </div>
             <div class="box2">
                 <li>
-                    <NuxtLink style="color:white" to="/home">Logs</NuxtLink>
+                    <NuxtLink style="color:white" to="/logs">Logs</NuxtLink>
                 </li>
             </div>
             <div class="box2">
                 <li>
-                    <NuxtLink style="color:white" to="/home">Red</NuxtLink>
+                    <NuxtLink style="color:white" to="/red">Red</NuxtLink>
                 </li>
             </div>
             <div class="box1">
                 <li>
-                    <NuxtLink style="color:white" to="/home">Configuración</NuxtLink>
+                    <NuxtLink style="color:white" to="/configuracion">Configuración</NuxtLink>
                 </li>
             </div>
             <div class="box3">
@@ -46,7 +46,7 @@
             <div class="form-check" align="center">
                 <b-form>
                     <b-button class="custom" pill>
-                        Agregar administrador 
+                        Agregar administrador
                     </b-button>
                     <br><br>
                     <b-button class="custom" pill>

@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
+    <div class="">
         <div align="center">
-            <b-card title="Inicio de sesion" body-text-variant="white" style="background-color: #6b123c" class="border mt-5"> 
+            <b-card title="Inicio de sesion" body-text-variant="white" style="background-color: #6b123c" class="">
                 <b-form @submit.stop.prevent="h">
                     <b-form-group id="input-group-1" label="Nombre usuario" label-for="input-1">
                         <b-form-input v-model="usuario.username" id="input-1" type="text" required placeholder="Ingesar nombre de usuario"></b-form-input>
@@ -28,7 +28,7 @@ export default {
         }
     },
     computed:{
-        
+
     },
     methods:{
         async loginuser(){
