@@ -24,6 +24,7 @@
           v-model="form.servicio"
           :options="opciones"
           class="mb-2"
+          @change="filtroservicios"
         ></b-form-select>
         <b-form-datepicker
           v-model="form.fechaI"
@@ -34,7 +35,7 @@
           class="mb-2"
         ></b-form-datepicker>
         <b-form-select
-          v-model="form.servicio"
+          v-model="form.estatus"
           :options="opcionesEstatus"
         ></b-form-select>
       </div>
@@ -49,10 +50,7 @@ export default {
   data() {
     return {
       selected: null,
-      opciones: [
-        { value: null, text: "Selecciona un servicio" },
-        { value: 1, text: "Servicio 1" },
-      ],
+      opciones: [],
       opcionesEstatus: [
         { value: null, text: "Selecciona un estatus" },
         { value: 1, text: "Estatus 1" },
@@ -126,14 +124,30 @@ export default {
           sortable: true,
         },
       ],
+      listaservicio:[],
       items: [],
+      logs: []
     };
+  },
+  methods:{
+    filtroservicios(){
+      let listafiltrada=this.logs.filter(x => x.Id_Cat_Servicios === this.form.servicio);
+      this.items=listafiltrada;
+    }
   },
   mounted: function (){
     let logservicioadmin = "http://127.0.0.1:8000/api/muestraadminserviciolog";
     axios.get(logservicioadmin).then((data) => {
         console.log(data);
-        this.items = data.data;
+        this.logs = data.data;
+        this.items = this.logs;
+        this.opciones.push({value: null, text: "Selecciona un Servicio"});
+        for (let index = 0; index < this.logs.length; index++) {
+          if (!this.opciones.includes(this.logs[index].Id_Cat_Servicios)) {
+            this.opciones.push(this.logs[index].Id_Cat_Servicios);
+          }
+        }
+        console.log(this.opciones);
     });
   }
 };
