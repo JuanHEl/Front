@@ -9,7 +9,7 @@
                     <b-form-group id="input-group-2" label="Contraseña" label-for="input-2">
                         <b-form-input v-model="usuario.password" id="input-2" type="password" required placeholder="Ingresa tu contraseña"></b-form-input>
                     </b-form-group>
-                    <b-button type="submit" to="/home">Iniciar sesión</b-button>
+                    <b-button class="btn btn-primary" variant="primary" type="submit" to="/home">Iniciar sesión</b-button>
                 </b-form>
             </b-card>
         </div>

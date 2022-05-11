@@ -226,20 +226,20 @@ export default {
         }
         this.selected = checked ? listavariable : []
     },
-        guardar() {
-            this.form.token = localStorage.getItem("token");
-            axios
-            .post("http://127.0.0.1:8000/api/create", this.form)
-            .then((data) => {
-            console.log(data);
-            this.makeToast("Hecho", "Paciente creado", "success");
-            this.$router.push("/dashboard");
-            })
-            .catch((e) => {
-            console.log(e);
-            this.makeToast("Error", "Error al guardar", "error");
-            });
-        },
+        // guardar() {
+        //     this.form.token = localStorage.getItem("token");
+        //     axios
+        //     .post("http://127.0.0.1:8000/api/create", this.form)
+        //     .then((data) => {
+        //     console.log(data);
+        //     this.makeToast("Hecho", "Paciente creado", "success");
+        //     this.$router.push("/dashboard");
+        //     })
+        //     .catch((e) => {
+        //     console.log(e);
+        //     this.makeToast("Error", "Error al guardar", "error");
+        //     });
+        // },
         salir() {
             this.$router.push("/admins");
         },
