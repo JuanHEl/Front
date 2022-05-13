@@ -14,11 +14,13 @@
       </div>
       <div id="formsInput">
         <b-form-input
+          v-model="form.id"
           id="input-1"
           type="text"
           placeholder="Id"
           required
           class="mb-2"
+          @change="filtraporid"
         ></b-form-input>
         <b-form-select
           v-model="form.servicio"
@@ -37,8 +39,10 @@
         <b-form-select
           v-model="form.estatus"
           :options="opcionesEstatus"
+          @change="filtroestatus"
         ></b-form-select>
       </div>
+      <b-button class="btn btn-primary" v-on:click="limpiar" variant="primary">Limpiar</b-button>
       <b-button class="btn btn-primary" variant="primary">Buscar</b-button>
     </div>
   </div>
@@ -51,10 +55,7 @@ export default {
     return {
       selected: null,
       opciones: [],
-      opcionesEstatus: [
-        { value: null, text: "Selecciona un estatus" },
-        { value: 1, text: "Estatus 1" },
-      ],
+      opcionesEstatus: [],
       form: {
         id: null,
         servicio: null,
@@ -124,15 +125,45 @@ export default {
           sortable: true,
         },
       ],
-      listaservicio:[],
       items: [],
-      logs: []
+      logs: [],
+      bandera: null
     };
   },
   methods:{
+    limpiar(bandera){
+      console.log(bandera);
+      if (bandera=="servicio") {
+        this.items=this.logs;
+        this.form.estatus=null;
+        this.form.id=null;
+      }else if(bandera=="estatus"){
+        this.items=this.logs;
+        this.form.servicio=null;
+        this.form.id=null;
+      }else if(bandera=="identificador"){
+        this.items=this.logs;
+        this.form.servicio=null;
+        this.form.estatus=null;
+      }
+    },
     filtroservicios(){
+      this.bandera = "servicio";
+      this.limpiar(this.bandera);
       let listafiltrada=this.logs.filter(x => x.Id_Cat_Servicios === this.form.servicio);
       this.items=listafiltrada;
+    },
+    filtroestatus(){
+      this.bandera = "estatus";
+      this.limpiar(this.bandera);
+      let listafiltrada=this.logs.filter(x => x.Id_Status_Log === this.form.estatus);
+      this.items=listafiltrada;
+    },
+    filtraporid(){
+      this.bandera = "identificador";
+      this.limpiar(this.bandera);
+      let listaporid = this.logs.filter(x => x.Id_Administradores === parseInt(this.form.id));
+      this.items=listaporid;
     }
   },
   mounted: function (){
@@ -148,6 +179,13 @@ export default {
           }
         }
         console.log(this.opciones);
+        this.opcionesEstatus.push({ value: null, text: "Selecciona un estatus" });
+        for (let index = 0; index < this.logs.length; index++) {
+          if (!this.opcionesEstatus.includes(this.logs[index].Id_Status_Log)) {
+            this.opcionesEstatus.push(this.logs[index].Id_Status_Log);
+          }
+        }
+        console.log(this.opcionesEstatus);
     });
   }
 };
