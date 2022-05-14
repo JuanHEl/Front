@@ -172,9 +172,9 @@
                 <button v-if="step==0" type="button submit" class="btn btn-primary" >
                     Continuar
                 </button>
-                <button v-if="step==1" type="button" class="btn btn-primary" v-on:click="setinfo">
+                <b-button v-if="step==1" type="button" class="btn btn-primary" variant="primary" v-on:click="setinfo" to="/admins">
                     Finalizar
-                </button>
+                </b-button>
             </div>
         </form>
         <p>{{form}} y además del form {{ selected }}</p>

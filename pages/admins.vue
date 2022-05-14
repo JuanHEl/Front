@@ -10,8 +10,8 @@
                 <th scope="col">Nombre Usuario</th>
                 <th scope="col">Apellido Paterno</th>
                 <th scope="col">Apellido Materno</th>
-                <th scope="col">Id Status Admin</th>
-                <th scope="col">Id Tipo Admin</th>
+                <th scope="col">Status Admin</th>
+                <th scope="col">Tipo Admin</th>
             </tr>
             </thead>
             <tbody>
@@ -24,8 +24,8 @@
                 <td>{{ admin.Nombre_Usuario }}</td>
                 <td>{{ admin.Apellido_P_Admin }}</td>
                 <td>{{ admin.Apellido_M_Admin }}</td>
-                <td>{{ admin.Id_Status_Admin }}</td>
-                <td>{{ admin.Id_Tipo_Admin }}</td>
+                <td>{{ admin.Id_Status_Admin[0].Nom_Tipo_Admin }}</td>
+                <td>{{ admin.Id_Tipo_Admin[0].Nom_Tipo_Admin }}</td>
             </tr>
             </tbody>
         </table>

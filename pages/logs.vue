@@ -42,7 +42,7 @@
           @change="filtroestatus"
         ></b-form-select>
       </div>
-      <b-button class="btn btn-primary" v-on:click="limpiar" variant="primary">Limpiar</b-button>
+      <b-button class="btn btn-primary" v-on:click="limpiar('todo')" variant="primary">Limpiar</b-button>
       <b-button class="btn btn-primary" variant="primary">Buscar</b-button>
     </div>
   </div>
@@ -75,8 +75,13 @@ export default {
           sortable: false,
         },
         {
-          key: "Id_Cat_Servicios",
+          key: "Id_Cat_Servicios[0].Nom_Cat_Servicios",
           label: "Servicio",
+          sortable: true,
+        },
+        {
+          key: "Id_Status_Log[0].Nom_Status_Log",
+          label: "Estatus",
           sortable: true,
         },
         {
@@ -118,12 +123,7 @@ export default {
           key: "Fecha_Fin_Serv",
           label: "Fecha fin",
           sortable: true,
-        },
-        {
-          key: "Id_Status_Log",
-          label: "Estatus",
-          sortable: true,
-        },
+        }
       ],
       items: [],
       logs: [],
@@ -133,7 +133,12 @@ export default {
   methods:{
     limpiar(bandera){
       console.log(bandera);
-      if (bandera=="servicio") {
+      if(bandera == 'todo'){
+        this.form.estatus=null;
+        this.form.id=null;
+        this.form.servicio=null;
+        this.items=this.logs;
+      }else if (bandera=="servicio") {
         this.items=this.logs;
         this.form.estatus=null;
         this.form.id=null;
@@ -150,13 +155,13 @@ export default {
     filtroservicios(){
       this.bandera = "servicio";
       this.limpiar(this.bandera);
-      let listafiltrada=this.logs.filter(x => x.Id_Cat_Servicios === this.form.servicio);
+      let listafiltrada=this.logs.filter(x => x.Id_Cat_Servicios[0].Nom_Cat_Servicios === this.form.servicio);
       this.items=listafiltrada;
     },
     filtroestatus(){
       this.bandera = "estatus";
       this.limpiar(this.bandera);
-      let listafiltrada=this.logs.filter(x => x.Id_Status_Log === this.form.estatus);
+      let listafiltrada=this.logs.filter(x => x.Id_Status_Log[0].Nom_Status_Log === this.form.estatus);
       this.items=listafiltrada;
     },
     filtraporid(){
@@ -174,15 +179,15 @@ export default {
         this.items = this.logs;
         this.opciones.push({value: null, text: "Selecciona un Servicio"});
         for (let index = 0; index < this.logs.length; index++) {
-          if (!this.opciones.includes(this.logs[index].Id_Cat_Servicios)) {
-            this.opciones.push(this.logs[index].Id_Cat_Servicios);
+          if (!this.opciones.includes(this.logs[index].Id_Cat_Servicios[0].Nom_Cat_Servicios)) {
+            this.opciones.push(this.logs[index].Id_Cat_Servicios[0].Nom_Cat_Servicios);
           }
         }
         console.log(this.opciones);
         this.opcionesEstatus.push({ value: null, text: "Selecciona un estatus" });
         for (let index = 0; index < this.logs.length; index++) {
-          if (!this.opcionesEstatus.includes(this.logs[index].Id_Status_Log)) {
-            this.opcionesEstatus.push(this.logs[index].Id_Status_Log);
+          if (!this.opcionesEstatus.includes(this.logs[index].Id_Status_Log[0].Nom_Status_Log)) {
+            this.opcionesEstatus.push(this.logs[index].Id_Status_Log[0].Nom_Status_Log);
           }
         }
         console.log(this.opcionesEstatus);
