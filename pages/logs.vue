@@ -17,7 +17,7 @@
           v-model="form.id"
           id="input-1"
           type="text"
-          placeholder="Id"
+          placeholder="Busca por id del administrador"
           required
           class="mb-2"
           @change="filtraporid"
@@ -31,10 +31,12 @@
         <b-form-datepicker
           v-model="form.fechaI"
           class="mb-2"
+          @input="buscaporinicio"
         ></b-form-datepicker>
         <b-form-datepicker
           v-model="form.fechaF"
           class="mb-2"
+          @input="buscaporfin"
         ></b-form-datepicker>
         <b-form-select
           v-model="form.estatus"
@@ -43,7 +45,7 @@
         ></b-form-select>
       </div>
       <b-button class="btn btn-primary" v-on:click="limpiar('todo')" variant="primary">Limpiar</b-button>
-      <b-button class="btn btn-primary" variant="primary">Buscar</b-button>
+      <!-- <b-button class="btn btn-primary" variant="primary">Busca por fecha</b-button> -->
     </div>
   </div>
 </template>
@@ -132,24 +134,44 @@ export default {
   },
   methods:{
     limpiar(bandera){
-      console.log(bandera);
+      // console.log(bandera);
       if(bandera == 'todo'){
         this.form.estatus=null;
         this.form.id=null;
         this.form.servicio=null;
+        this.form.fechaI=null;
+        this.form.fechaF=null;
         this.items=this.logs;
       }else if (bandera=="servicio") {
         this.items=this.logs;
         this.form.estatus=null;
+        this.form.fechaI=null;
+        this.form.fechaF=null;
         this.form.id=null;
       }else if(bandera=="estatus"){
         this.items=this.logs;
         this.form.servicio=null;
+        this.form.fechaI=null;
+        this.form.fechaF=null;
         this.form.id=null;
       }else if(bandera=="identificador"){
         this.items=this.logs;
+        this.form.fechaI=null;
+        this.form.fechaF=null;
         this.form.servicio=null;
         this.form.estatus=null;
+      }else if(bandera=="fechaI"){
+        this.items=this.logs;
+        this.form.estatus=null;
+        this.form.id=null;
+        this.form.servicio=null;
+        this.form.fechaF=null;
+      }else if(bandera=="fechaF"){
+        this.items=this.logs;
+        this.form.estatus=null;
+        this.form.id=null;
+        this.form.servicio=null;
+        this.form.fechaI=null;
       }
     },
     filtroservicios(){
@@ -169,12 +191,24 @@ export default {
       this.limpiar(this.bandera);
       let listaporid = this.logs.filter(x => x.Id_Administradores === parseInt(this.form.id));
       this.items=listaporid;
+    },
+    buscaporinicio(){
+      this.bandera = "fechaI";
+      this.limpiar(this.bandera);
+      let fecha = this.logs.filter(x => x.Fecha_Init_Serv == this.form.fechaI );
+      this.items=fecha;
+    },
+    buscaporfin(){
+      this.bandera = "fechaF";
+      this.limpiar(this.bandera);
+      let fecha = this.logs.filter(x => x.Fecha_Fin_Serv == this.form.fechaF );
+      this.items=fecha;
     }
   },
   mounted: function (){
     let logservicioadmin = "http://127.0.0.1:8000/api/muestraadminserviciolog";
     axios.get(logservicioadmin).then((data) => {
-        console.log(data);
+        // console.log(data);
         this.logs = data.data;
         this.items = this.logs;
         this.opciones.push({value: null, text: "Selecciona un Servicio"});
@@ -183,14 +217,14 @@ export default {
             this.opciones.push(this.logs[index].Id_Cat_Servicios[0].Nom_Cat_Servicios);
           }
         }
-        console.log(this.opciones);
+        // console.log(this.opciones);
         this.opcionesEstatus.push({ value: null, text: "Selecciona un estatus" });
         for (let index = 0; index < this.logs.length; index++) {
           if (!this.opcionesEstatus.includes(this.logs[index].Id_Status_Log[0].Nom_Status_Log)) {
             this.opcionesEstatus.push(this.logs[index].Id_Status_Log[0].Nom_Status_Log);
           }
         }
-        console.log(this.opcionesEstatus);
+        // console.log(this.opcionesEstatus);
     });
   }
 };
