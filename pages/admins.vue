@@ -50,10 +50,10 @@
                 </b-input-group>
                 <p></p>
                 <b-button block class="buttons" pill variant="primary" to="/nuevoadmin" font-scale="3"> Agregar Nuevo Administrador</b-button>
-                <b-button block class="buttons" pill variant="primary" font-scale="3"> Cambiar Status </b-button>
-                <b-button block class="buttons" pill variant="primary" font-scale="3"> Editar Administrador</b-button>
+                <b-button block class="buttons" pill variant="primary" to="/cambiastatus" font-scale="3"> Cambiar Status </b-button>
+                <b-button block class="buttons" pill variant="primary" to="/editaradmin" font-scale="3"> Editar Administrador</b-button>
                 <br>
-                <b-button block class="buttons" pill variant="primary" font-scale="3"> Editar Permisos</b-button>
+                <b-button block class="buttons" pill variant="primary" to="/editarpermisos" font-scale="3"> Editar Permisos</b-button>
             </div>
             <!-- <b-form-input
             v-model="form.nombe"
@@ -114,5 +114,6 @@ export default {
     padding: 5px;
     border-radius: 10px;
     min-height: 400px;
+    color: white;
 }
 </style>

@@ -1,183 +1,191 @@
 <template>
-    <div>
-        <div class="container">
-        <form @submit.stop.prevent="sig" class="form-horizontal">
-            <div v-if="step==0">
-                <div class="form-group left">
-                <label for="" class="control-label col-sm-2 text-white">Nombre</label>
-                <div class="col-sm-10">
-                    <input
-                    type="text"
-                    class="form-control"
-                    name="nombre"
-                    id="nombre"
-                    v-model="form.nombre"
-                    required
-                    />
-                </div>
-                </div>
-                <div class="form-group left">
-                <label for="" class="control-label col-sm-2 text-white"
-                    >Apellido Paterno</label
-                >
-                <div class="col-sm-10">
-                    <input
-                    type="text"
-                    class="form-control"
-                    name="nombre"
-                    id="nombre"
-                    v-model="form.apellidop"
-                    required
-                    />
-                </div>
-                </div>
-                <div class="form-group left">
-                <label for="" class="control-label col-sm-2 text-white"
-                    >Apellido Materno</label
-                >
-                <div class="col-sm-10">
-                    <input
-                    type="text"
-                    class="form-control"
-                    name="nombre"
-                    id="nombre"
-                    v-model="form.apellidom"
-                    required
-                    />
-                </div>
-                </div>
-                <div class="form-group left row">
-                <div class="col">
-                    <label for="" class="control-label col-sm-3 text-white"
-                    >Contraseña</label
+    <div id="contenedor">
+        <div id="tabla">
+            <form @submit.stop.prevent="sig" class="form-horizontal">
+                <div v-if="step==0">
+                    <div class="form-group left">
+                    <label for="" class="control-label col-sm-2 text-white">Nombre</label>
+                    <div class="col-sm-10">
+                        <input
+                        type="text"
+                        class="form-control"
+                        name="nombre"
+                        id="nombre"
+                        v-model="form.nombre"
+                        required
+                        />
+                    </div>
+                    </div>
+                    <div class="form-group left">
+                    <label for="" class="control-label col-sm-2 text-white"
+                        >Apellido Paterno</label
                     >
-                    <div class="col-sm-7">
-                        <b-input-group>
-                            <b-input-group-prepend is-text @click.prevent="mostrarContrasena">
-                                <b-icon :icon="icon" style="color:black">
-                                </b-icon>
-                            </b-input-group-prepend>
-                                <b-input
-                                    :type="showpass"
-                                    class="form-control"
-                                    name="correo"
-                                    id="correo"
-                                    v-model="form.pass"
-                                    required
-                                />
-                        </b-input-group>
+                    <div class="col-sm-10">
+                        <input
+                        type="text"
+                        class="form-control"
+                        name="nombre"
+                        id="nombre"
+                        v-model="form.apellidop"
+                        required
+                        />
                     </div>
-                </div>
-                <div class="col">
-                    <button type="button" id="password" class="btn btn-primary" v-on:click="generarcontra()">
-                    Generar Contraseña
-                    </button>
-                </div>
-                </div>
-                <div class="form-group left">
-                <label for="" class="control-label col-sm-2 text-white"
-                    >Nombre Usuario</label
-                >
-                <div class="col-sm-10">
-                    <input
-                    type="text"
-                    class="form-control"
-                    name="direccion"
-                    id="direccion"
-                    v-model="form.nombreusuario"
-                    required
-                    />
-                </div>
-                </div>
-                <div>
-                    <div class="form-check-inline">
-                        <div class="col-md-6">
-                            <b-form-group label="Status" class="text-white">
-                                <b-form-select v-model="form.statusa" required>
-                                    <template #first>
-                                        <b-form-select-option :value="null" disabled>
-                                            Selecciona un status
-                                        </b-form-select-option>
-                                        <b-form-select-option v-for="stat in statusadmin" :key="stat.index" :value="stat.Id_Status_Admin">{{stat.Nom_Tipo_Admin}}
-                                        </b-form-select-option>
-                                    </template>
-                                </b-form-select>
-                            </b-form-group>
-                        </div>
-                        <div class="col-md-6">
-                            <b-form-group label="Tipo" class="text-white">
-                                <b-form-select v-model="form.tipoa" required>
-                                    <template #first>
-                                        <b-form-select-option :value="null" disabled>
-                                            Selecciona un tipo
-                                        </b-form-select-option>
-                                        <b-form-select-option v-for="tipo in tipoadmins" :key="tipo.index" :value="tipo.Id_Tipo_Admin">{{tipo.Nom_Tipo_Admin}}
-                                        </b-form-select-option>
-                                    </template>
-                                </b-form-select>
-                            </b-form-group>
+                    </div>
+                    <div class="form-group left">
+                    <label for="" class="control-label col-sm-2 text-white"
+                        >Apellido Materno</label
+                    >
+                    <div class="col-sm-10">
+                        <input
+                        type="text"
+                        class="form-control"
+                        name="nombre"
+                        id="nombre"
+                        v-model="form.apellidom"
+                        required
+                        />
+                    </div>
+                    </div>
+                    <div class="form-group left row">
+                    <div class="col">
+                        <label for="" class="control-label col-sm-3 text-white"
+                        >Contraseña</label
+                        >
+                        <div class="col-sm-7">
+                            <b-input-group>
+                                <b-input-group-prepend is-text @click.prevent="mostrarContrasena">
+                                    <b-icon :icon="icon" style="color:black">
+                                    </b-icon>
+                                </b-input-group-prepend>
+                                    <b-input
+                                        :type="showpass"
+                                        class="form-control"
+                                        name="correo"
+                                        id="correo"
+                                        v-model="form.pass"
+                                        required
+                                    />
+                            </b-input-group>
                         </div>
                     </div>
-                <br /><br />
-                </div>
-            </div>
-
-            <div v-if="step==1">
-                <div class="container">
-                    <b-form-group>
-                        <template #label>
-                            <label for="" class="control-label col-sm-3 text-white">Selecciona los servicios:</label>
-                            <!-- <b class="control-label col-sm-2 text-white">Selecciona los servicios:</b> --><br>
-                            <b-form-checkbox
-                            size="lg"
-                            v-model="allSelected"
-                            :indeterminate="indeterminate"
-                            @change="toggleAll"
-                            class="control-label text-white"
-                            stacked
-                            >
-                            {{ allSelected ? 'Quitar todos' : 'Selecciona todos' }}
-                            </b-form-checkbox>
-                        </template>
-
-                        <template v-slot="{ ariaDescribedby }">
-                            <b-form-checkbox-group
-                            size="lg"
-                            v-model="selected"
-                            :options="listservicios"
-                            :aria-describedby="ariaDescribedby"
-                            class="ml-4 control-label text-white"
-                            value-field="item"
-                            text-field="name"
-                            stacked
-                            ></b-form-checkbox-group>
-                        </template>
-                    </b-form-group>
-                    <!-- 
+                    <div class="col">
+                        <button type="button" id="password" class="btn btn-primary" v-on:click="generarcontra()">
+                        Generar Contraseña
+                        </button>
+                    </div>
+                    </div>
+                    <div class="form-group left">
+                    <label for="" class="control-label col-sm-2 text-white"
+                        >Nombre Usuario</label
+                    >
+                    <div class="col-sm-10">
+                        <input
+                        type="text"
+                        class="form-control"
+                        name="direccion"
+                        id="direccion"
+                        v-model="form.nombreusuario"
+                        required
+                        />
+                    </div>
+                    </div>
                     <div>
-                    Selected: <strong>{{ selected }}</strong><br>
-                    All Selected: <strong>{{ allSelected }}</strong><br>
-                    Indeterminate: <strong>{{ indeterminate }}</strong>
-                    </div> -->
+                        <div class="form-check-inline">
+                            <div class="col-md-6">
+                                <b-form-group label="Status" class="text-white">
+                                    <b-form-select v-model="form.statusa" required>
+                                        <template #first>
+                                            <b-form-select-option :value="null" disabled>
+                                                Selecciona un status
+                                            </b-form-select-option>
+                                            <b-form-select-option v-for="stat in statusadmin" :key="stat.index" :value="stat.Id_Status_Admin">{{stat.Nom_Tipo_Admin}}
+                                            </b-form-select-option>
+                                        </template>
+                                    </b-form-select>
+                                </b-form-group>
+                            </div>
+                            <div class="col-md-6">
+                                <b-form-group label="Tipo" class="text-white">
+                                    <b-form-select v-model="form.tipoa" required>
+                                        <template #first>
+                                            <b-form-select-option :value="null" disabled>
+                                                Selecciona un tipo
+                                            </b-form-select-option>
+                                            <b-form-select-option v-for="tipo in tipoadmins" :key="tipo.index" :value="tipo.Id_Tipo_Admin">{{tipo.Nom_Tipo_Admin}}
+                                            </b-form-select-option>
+                                        </template>
+                                    </b-form-select>
+                                </b-form-group>
+                            </div>
+                        </div>
+                    <br /><br />
+                    </div>
                 </div>
-            </div>
+                <div v-if="step==1">
+                    <div class="container">
+                        <b-form-group>
+                            <template #label>
+                                <label for="" class="control-label col-sm-3 text-white">Selecciona los servicios:</label>
+                                <!-- <b class="control-label col-sm-2 text-white">Selecciona los servicios:</b> --><br>
+                                <b-form-checkbox
+                                size="lg"
+                                v-model="allSelected"
+                                :indeterminate="indeterminate"
+                                @change="toggleAll"
+                                class="control-label text-white"
+                                stacked
+                                >
+                                {{ allSelected ? 'Quitar todos' : 'Selecciona todos' }}
+                                </b-form-checkbox>
+                            </template>
+                            <template v-slot="{ ariaDescribedby }">
+                                <b-form-checkbox-group
+                                size="lg"
+                                v-model="selected"
+                                :options="listservicios"
+                                :aria-describedby="ariaDescribedby"
+                                class="ml-4 control-label text-white"
+                                value-field="item"
+                                text-field="name"
+                                stacked
+                                ></b-form-checkbox-group>
+                            </template>
+                        </b-form-group>
+                        <!-- 
+                        <div>
+                        Selected: <strong>{{ selected }}</strong><br>
+                        All Selected: <strong>{{ allSelected }}</strong><br>
+                        Indeterminate: <strong>{{ indeterminate }}</strong>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button v-if="step==0" type="button" class="btn btn-primary" v-on:click="salir()">
+                        Salir
+                    </button>
+                    <button v-if="step==1" type="button" class="btn btn-primary" v-on:click="ant">
+                        Anterior
+                    </button>
+                    <button v-if="step==0" type="button submit" class="btn btn-primary" >
+                        Continuar
+                    </button>
+                    <b-button v-if="step==1" type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setinfo" to="/admins">
+                        Finalizar
+                    </b-button>
+                </div>
+            </form>
 
-            <div class="form-group">
-                <button v-if="step==0" type="button" class="btn btn-primary" v-on:click="salir()">
-                    Salir
-                </button>
-                <button v-if="step==1" type="button" class="btn btn-primary" v-on:click="ant">
-                    Anterior
-                </button>
-                <button v-if="step==0" type="button submit" class="btn btn-primary" >
-                    Continuar
-                </button>
-                <b-button v-if="step==1" type="button" class="btn btn-primary" variant="primary" v-on:click="setinfo" to="/admins">
-                    Finalizar
-                </b-button>
+        </div>
+        <!-- <p>{{form}} y además del form {{ selected }}</p> -->
+        <div id="botones">
+            <div>
+                <br>
+                <b-button block class="buttons" pill variant="primary" to="/nuevoadmin" font-scale="3"> Agregar Nuevo Administrador</b-button>
+                <b-button block class="buttons" pill variant="primary" to="cambiastatus" font-scale="3"> Cambiar Status </b-button>
+                <b-button block class="buttons" pill variant="primary" to="/editaradmin" font-scale="3"> Editar Administrador</b-button>
+                <br>
+                <b-button block class="buttons" pill variant="primary" to="/editarpermisos" font-scale="3"> Editar Permisos</b-button>
             </div>
-        </form>
-        <p>{{form}} y además del form {{ selected }}</p>
         </div>
     </div>
 </template>
@@ -326,7 +334,26 @@ export default {
 };
 </script>
 <style scoped>
+#contenedor {
+    display: flex;
+}
 .left {
     text-align: left;
+}
+#botones {
+    width: 35%;
+    margin: 2px;
+    padding: 5px;
+    border-radius: 10px;
+    min-height: 400px;
+    color: white;
+}
+#tabla {
+    width: 100%;
+    /* background-color: rgb(255, 255, 255); */
+    /* margin: 2px;
+    padding: 5px;
+    border-radius: 10px;
+    min-height: 400px; */
 }
 </style>
