@@ -30,23 +30,31 @@
                 </tr>
                 </tbody>
             </table>
-            <b-button variant="primary" to="/nuevoadmin"> Nuevo Administrador </b-button>
+            <!-- <b-button variant="primary" to="/nuevoadmin"> Nuevo Administrador </b-button> -->
             </div>
         </div>
         <div id="botones">
-                        <b-input-group>
-                            <b-input-group-prepend is-text @click.prevent="buscanombre">
-                                <b-icon icon="search" style="color:black">
-                                </b-icon>
-                            </b-input-group-prepend>
-                                <b-input
-                                    v-model="form.nombe"
-                                    id="input-1"
-                                    type="text"
-                                    placeholder="Buscar por nombre de usuario"
-                                    required
-                                />
-                        </b-input-group>
+            <div>
+                <b-input-group>
+                    <b-input-group-prepend is-text @click.prevent="buscanombre">
+                        <b-icon icon="search" style="color:black">
+                        </b-icon>
+                    </b-input-group-prepend>
+                        <b-input
+                            v-model="form.nombe"
+                            id="input-1"
+                            type="text"
+                            placeholder="Buscar por nombre de usuario"
+                            required
+                        />
+                </b-input-group>
+                <p></p>
+                <b-button block class="buttons" pill variant="primary" to="/nuevoadmin" font-scale="3"> Agregar Nuevo Administrador</b-button>
+                <b-button block class="buttons" pill variant="primary" font-scale="3"> Cambiar Status </b-button>
+                <b-button block class="buttons" pill variant="primary" font-scale="3"> Editar Administrador</b-button>
+                <br>
+                <b-button block class="buttons" pill variant="primary" font-scale="3"> Editar Permisos</b-button>
+            </div>
             <!-- <b-form-input
             v-model="form.nombe"
             id="input-1"
