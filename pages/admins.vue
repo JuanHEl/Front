@@ -32,7 +32,7 @@
             </table>
             <!-- <b-button variant="primary" to="/nuevoadmin"> Nuevo Administrador </b-button> -->
             </div>
-        </div>
+            </div>
         <div id="botones">
             <div>
                 <b-input-group>
