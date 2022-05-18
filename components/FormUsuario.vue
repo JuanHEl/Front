@@ -122,10 +122,10 @@
                     </div>
                 </div>
                 <div v-if="step==1">
-                    <div class="container">
+                    <div class="container form-group col-sm-10">
                         <b-form-group>
                             <template #label>
-                                <label for="" class="control-label col-sm-3 text-white">Selecciona los servicios:</label>
+                                <label for="" class="control-label text-white">Selecciona los servicios:</label>
                                 <!-- <b class="control-label col-sm-2 text-white">Selecciona los servicios:</b> --><br>
                                 <b-form-checkbox
                                 size="lg"
@@ -291,7 +291,7 @@ export default {
             this.form.servicios=this.selected
             let resp = `http://127.0.0.1:8000/api/createadmintareas?Id_Status_Admin=${this.form.statusa}&Id_Tipo_Admin=${this.form.tipoa}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Password_Hash=${this.form.pass}&Cant_dias_limit=0&Id_Cat_Tareas=${this.form.servicios}`;
             await axios.post(resp).then((data) => {
-            console.log(data);
+            // console.log(data);
         });
         }
     },
@@ -313,22 +313,22 @@ export default {
     mounted: function () {
         let tipoadmin = "http://127.0.0.1:8000/api/muestratipoa";
         axios.get(tipoadmin).then((data) => {
-            console.log(data);
+            // console.log(data);
             this.tipoadmins = data.data;
         });
         let statusadmin = "http://127.0.0.1:8000/api/muestrastatusa";
         axios.get(statusadmin).then((data) => {
-            console.log(data);
+            // console.log(data);
             this.statusadmin = data.data;
         });
         let catservicios = "http://127.0.0.1:8000/api/muestracatservicio";
         axios.get(catservicios).then((data) => {
-            console.log(data);
+            // console.log(data);
             this.catservicios = data.data;
             for (let index = 0; index < this.catservicios.length; index++) {
                 this.listservicios.push({name:this.catservicios[index].Nom_Cat_Servicios,item:this.catservicios[index].Id_Cat_Servicios});
             }
-            console.log(this.listservicios);
+            // console.log(this.listservicios);
         });
     },
 };

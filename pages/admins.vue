@@ -97,11 +97,19 @@ export default {
     mounted: function () {
         let admin = "http://127.0.0.1:8000/api/muestra";
         axios.get(admin).then((data) => {
-            console.log(data);
+            // console.log(data);
             this.Listaadmins = data.data;
             this.logs = this.Listaadmins;
         });
     },
+    beforeMount: function () {
+        let admin = "http://127.0.0.1:8000/api/muestra";
+        axios.get(admin).then((data) => {
+            // console.log(data);
+            this.Listaadmins = data.data;
+            this.logs = this.Listaadmins;
+        });
+    }
 };
 </script>
 <style scoped>

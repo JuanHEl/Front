@@ -2,8 +2,21 @@
     <div id="contenedor">
         <div id="tabla">
             <div class="form-group left col-sm-10">
-                <b-input-group>
+                <b-input-group v-if="form.id.length > 0">
                     <b-input-group-prepend is-text @click.prevent="buscanombre">
+                        <b-icon icon="search" style="color:black">
+                        </b-icon>
+                    </b-input-group-prepend>
+                        <b-input
+                            v-model="form.id"
+                            id="input-1"
+                            type="text"
+                            placeholder="Buscar por id de administrador"
+                            required
+                        />
+                </b-input-group>
+                <b-input-group v-else>
+                    <b-input-group-prepend is-text >
                         <b-icon icon="search" style="color:black">
                         </b-icon>
                     </b-input-group-prepend>
@@ -25,7 +38,7 @@
                     name="nombre"
                     id="nombre"
                     v-model="form.nombre"
-                    required
+                    disabled
                     />
                 </div>
             </div>
@@ -40,7 +53,7 @@
                     name="nombre"
                     id="nombre"
                     v-model="form.apellidop"
-                    required
+                    disabled
                     />
                 </div>
             </div>
@@ -55,7 +68,7 @@
                     name="nombre"
                     id="nombre"
                     v-model="form.apellidom"
-                    required
+                    disabled
                     />
                 </div>
             </div>
@@ -70,14 +83,14 @@
                     name="direccion"
                     id="direccion"
                     v-model="form.nombreusuario"
-                    required
+                    disabled
                     />
                 </div>
             </div>
             <div>
                 <div class="form-check-inline">
                     <b-form-group label="Status" class="text-white">
-                        <b-form-select v-model="form.statusa" required>
+                        <b-form-select v-model="form.statusa" required :disabled="bloqueado">
                             <template #first>
                                 <b-form-select-option :value="null" disabled>
                                     Selecciona un status
@@ -89,6 +102,14 @@
                     </b-form-group>
                 </div>
             <br /><br />
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" v-on:click="salir()">
+                        Salir
+                    </button>
+                    <b-button type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setinfo" to="/admins" :disabled="bloqueado">
+                        Finalizar
+                    </b-button>
+                </div>
             </div>
         </div>
         <div id="botones">
@@ -109,6 +130,7 @@ export default {
     name: "FormStatus",
     data: function () {
         return {
+            bloqueado:true,
             statusadmin: null,
             Listaadmins: null,
             logs:[],
@@ -117,11 +139,8 @@ export default {
                 nombre: "",
                 apellidop: "",
                 apellidom: "",
-                pass: "",
                 nombreusuario: "",
                 statusa: null,
-                tipoa: null,
-                servicios:null,
             }
         };
     },
@@ -132,7 +151,23 @@ export default {
             this.logs=this.Listaadmins;
             let listapornombre = this.logs.filter(x => x.Id_Administradores == this.form.id);
             this.logs=listapornombre;
-            // console.log(this.logs)
+            this.form.id=this.logs[0].Id_Administradores;
+            this.form.nombre=this.logs[0].Nombre_Admin;
+            this.form.apellidop=this.logs[0].Apellido_P_Admin;
+            this.form.apellidom=this.logs[0].Apellido_M_Admin;
+            this.form.nombreusuario=this.logs[0].Nombre_Usuario;
+            this.form.statusa=this.logs[0].Id_Status_Admin[0].Id_Status_Admin;
+            this.bloqueado=false;
+            // console.log(this.logs);
+        },
+        salir() {
+            this.$router.push("/admins");
+        },
+        async setinfo(){
+            let resp = `http://127.0.0.1:8000/api/update?Id_Administradores=${this.form.id}&Id_Status_Admin=${this.form.statusa}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Id_Tipo_Admin=${this.logs[0].Id_Tipo_Admin[0].Id_Tipo_Admin}&Password_Hash=${this.logs[0].Password_Hash}&Cant_dias_limit=${this.logs[0].Cant_dias_limit}`;
+            await axios.put(resp).then((data) => {
+            // console.log(resp);
+        });
         }
     },
     watch: {
@@ -140,13 +175,13 @@ export default {
     mounted: function () {
         let admin = "http://127.0.0.1:8000/api/muestra";
         axios.get(admin).then((data) => {
-            console.log(data);
+            // console.log(data);
             this.Listaadmins = data.data;
             this.logs = this.Listaadmins;
         });
         let statusadmin = "http://127.0.0.1:8000/api/muestrastatusa";
         axios.get(statusadmin).then((data) => {
-            console.log(data);
+            // console.log(data);
             this.statusadmin = data.data;
         });
     },

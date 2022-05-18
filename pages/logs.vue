@@ -13,7 +13,21 @@
         <p style="color:white;">Filtros</p>
       </div>
       <div id="formsInput">
-        <b-form-input
+        <b-input-group>
+            <b-input-group-prepend is-text @click.prevent="filtraporid">
+                <b-icon icon="search" style="color:black">
+                </b-icon>
+            </b-input-group-prepend>
+                <b-input
+                    v-model="form.id"
+                    id="input-1"
+                    type="text"
+                    placeholder="Busca por id del administrador"
+                    required
+                />
+        </b-input-group>
+        <p></p>
+        <!-- <b-form-input
           v-model="form.id"
           id="input-1"
           type="text"
@@ -21,7 +35,7 @@
           required
           class="mb-2"
           @change="filtraporid"
-        ></b-form-input>
+        ></b-form-input> -->
         <b-form-select
           v-model="form.servicio"
           :options="opciones"
