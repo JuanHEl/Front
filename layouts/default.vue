@@ -28,11 +28,11 @@
                     <NuxtLink style="color:white" to="/configuracion">Configuración</NuxtLink>
                 </li>
             </div>
-            <div class="box3">
+            <!-- <div class="box3">
                 <li>
                     <NuxtLink style="color:white" to="/login">Login</NuxtLink>
                 </li>
-            </div>
+            </div> -->
         </div>
       </ul>
     </nav>
