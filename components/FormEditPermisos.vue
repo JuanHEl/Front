@@ -64,7 +64,7 @@
                 <button type="button" class="btn btn-primary" v-on:click="salir()">
                     Salir
                 </button>
-                <b-button type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setpermisos" to="/admins" :disabled="bloqueado">
+                <b-button type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setpermisos" :disabled="bloqueado"> //to="/admins"
                     Finalizar
                 </b-button>
             </div>
@@ -132,31 +132,13 @@ export default {
             let listaapintar=[];
             let resp = `http://127.0.0.1:8000/api/showcattareaa/${this.form.id}`;
             await axios.get(resp).then((data) => {
-                // for (let index = 0; index < data.data.admins.length; index++) {
-                //     listaapintar.push(data.data.admins[index].tareaenadmin);
-                //     // console.log(data.data.admins[index].tareaenadmin);
-                // }
                 for (let index = 0; index < this.listservicios.length; index++) {
-                    console.log(this.listservicios[index].item)
-                    console.log(data.data.admins[index].tareaenadmin)
-
-                    // if (this.listservicios[index].item == data.data.admins[index].tareaenadmin) {
-                    //     listaapintar.push(data.data.admins[index].tareaenadmin);                        
-                    // }else{
-                    //     lista.push(data.data.admins[index].tareaenadmin);    
-                    // }
-
-
-                    // if (data.data.admins[index]) {
-                    //     console.log(this.listservicios[index].item);
-                    //     console.log(data.data.admins[index].tareaenadmin)
-                    // if (!this.listservicios.includes(data.data.admins[index].tareaenadmin)) {
-                    //     const element = this.listservicios[index];
-                    //     lista.push(element);
-                    // }else{
-                    //     listaapintar.push(data.data.admins[index].tareaenadmin);    
-                    // }
-                    // }
+                    if (data.data.admins[index]) {
+                        console.log(data.data.admins[index].tareaenadmin)
+                        listaapintar.push(data.data.admins[index].tareaenadmin); 
+                    }else{
+                        lista.push(this.listservicios[index]);
+                    }
                 }
             this.selected=listaapintar;
             this.bloqueado=false;
@@ -167,10 +149,11 @@ export default {
         });
         },
         async setpermisos(){
-        //     let resp = `http://127.0.0.1:8000/api/update?Id_Administradores=${this.form.id}&Id_Status_Admin=${this.logs[0].Id_Status_Admin[0].Id_Status_Admin}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Id_Tipo_Admin=${this.form.tipoa}&Password_Hash=${this.logs[0].Password_Hash}&Cant_dias_limit=${this.logs[0].Cant_dias_limit}`;
-        //     await axios.put(resp).then((data) => {
-        //     // console.log(resp);
-        // });
+            console.log(this.selected)
+            let resp = `http://127.0.0.1:8000/api/addtarea?Arreglo=${this.selected}&Id_Administrador=${this.form.id}`;
+            await axios.get(resp).then((data) => {
+            console.log(data);
+        });
         },
     },
     watch: {
