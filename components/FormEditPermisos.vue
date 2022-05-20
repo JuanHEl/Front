@@ -1,7 +1,7 @@
 <template>
     <div id="contenedor">
         <div id="tabla">
-            <h1 class="text-white">Editar Permisos</h1> <br>
+            <h1 class="text-white">Editar Permisos {{this.nombrecompleto}}</h1> <br>
             <div class="form-group left col-sm-10">
                 <b-input-group v-if="form.id.length > 0">
                     <b-input-group-prepend is-text @click.prevent="setinfo()">
@@ -33,8 +33,7 @@
             <div class="container form-group col-sm-10">
                 <b-form-group>
                     <template #label>
-                        <label for="" class="control-label text-white">Selecciona los servicios:</label>
-                        <!-- <b class="control-label col-sm-2 text-white">Selecciona los servicios:</b> --><br>
+                        <label for="" class="control-label text-white">Selecciona los servicios:</label><br>
                         <b-form-checkbox
                         size="lg"
                         v-model="allSelected"
@@ -64,7 +63,8 @@
                 <button type="button" class="btn btn-primary" v-on:click="salir()">
                     Salir
                 </button>
-                <b-button type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setpermisos" :disabled="bloqueado"> //to="/admins"
+                <b-button class="btn btn-primary" v-on:click="limpiar" variant="primary">Limpiar</b-button>
+                <b-button type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setpermisos" :disabled="bloqueado" to="/admins">
                     Finalizar
                 </b-button>
             </div>
@@ -92,8 +92,7 @@ export default {
             allSelected: false,
             indeterminate: false,
             listservicios:[],
-            // Listaadmins: null,
-            // logs:[],
+            nombrecompleto:null,
             form: {
                 id: "",
             }
@@ -102,19 +101,6 @@ export default {
     components: {
     },
     methods: {
-        // buscanombre(){
-        //     this.logs=this.Listaadmins;
-        //     let listapornombre = this.logs.filter(x => x.Id_Administradores == this.form.id);
-        //     this.logs=listapornombre;
-        //     this.form.id=this.logs[0].Id_Administradores;
-        //     // this.form.nombre=this.logs[0].Nombre_Admin;
-        //     // this.form.apellidop=this.logs[0].Apellido_P_Admin;
-        //     // this.form.apellidom=this.logs[0].Apellido_M_Admin;
-        //     // this.form.nombreusuario=this.logs[0].Nombre_Usuario;
-        //     // this.form.tipoa=this.logs[0].Id_Tipo_Admin[0].Id_Tipo_Admin;
-        //     this.bloqueado=false;
-        //     console.log(this.logs);
-        // },
         toggleAll(checked) {
             let listavariable = [];
             let variable;
@@ -127,14 +113,20 @@ export default {
         salir() {
             this.$router.push("/admins");
         },
+        limpiar(){
+            this.nombrecompleto="";
+            this.form.id="";
+            this.selected=[];
+            this.bloqueado=true;
+        },
         async setinfo(){
             let lista=[];
             let listaapintar=[];
-            let resp = `http://127.0.0.1:8000/api/showcattareaa/${this.form.id}`;
+            let resp = `http://127.0.0.1:8000/api/showcatservicioa/${this.form.id}`;
             await axios.get(resp).then((data) => {
                 for (let index = 0; index < this.listservicios.length; index++) {
                     if (data.data.admins[index]) {
-                        console.log(data.data.admins[index].tareaenadmin)
+                        // console.log(data.data.admins[index].tareaenadmin);
                         listaapintar.push(data.data.admins[index].tareaenadmin); 
                     }else{
                         lista.push(this.listservicios[index]);
@@ -142,18 +134,23 @@ export default {
                 }
             this.selected=listaapintar;
             this.bloqueado=false;
-            console.log("Aqui ta")
-            console.log(listaapintar);
-            console.log("Lista a borrar")
-            console.log(lista)
-        });
+            // console.log("Aqui ta")
+            // console.log(listaapintar);
+            // console.log("Lista a borrar")
+            // console.log(lista)
+            });
+            let admin = `http://127.0.0.1:8000/api/show/${this.form.id}`;
+            axios.get(admin).then((data) => {
+                this.nombrecompleto=data.data.data[0].Nombre_Admin + " " +data.data.data[0].Apellido_P_Admin;
+                // console.log(this.nombrecompleto);
+            });
         },
         async setpermisos(){
-            console.log(this.selected)
-            let resp = `http://127.0.0.1:8000/api/addtarea?Arreglo=${this.selected}&Id_Administrador=${this.form.id}`;
+            // console.log(this.selected);
+            let resp = `http://127.0.0.1:8000/api/addservicio?lista_insert=${this.selected}&Id_Administrador=${this.form.id}`;
             await axios.get(resp).then((data) => {
-            console.log(data);
-        });
+            // console.log(data);
+            });
         },
     },
     watch: {
@@ -172,12 +169,6 @@ export default {
         }
     },
     mounted: function () {
-        // let admin = "http://127.0.0.1:8000/api/muestra";
-        // axios.get(admin).then((data) => {
-        //     // console.log(data);
-        //     this.Listaadmins = data.data;
-        //     this.logs = this.Listaadmins;
-        // });
         let catservicios = "http://127.0.0.1:8000/api/muestracatservicio";
         axios.get(catservicios).then((data) => {
             // console.log(data);
@@ -185,17 +176,8 @@ export default {
             for (let index = 0; index < this.catservicios.length; index++) {
                 this.listservicios.push({name:this.catservicios[index].Nom_Cat_Servicios,item:this.catservicios[index].Id_Cat_Servicios});
             }
-            console.log(this.listservicios);
+            // console.log(this.listservicios);
         });
-        // let cattareas = `http://127.0.0.1:8000/api/showcattareaa/${this.form.id}`;
-        // axios.get(cattareas).then((data) => {
-        //     console.log(data);
-        //     // this.catservicios = data.data;
-        //     // for (let index = 0; index < this.catservicios.length; index++) {
-        //     //     this.listservicios.push({name:this.catservicios[index].Nom_Cat_Servicios,item:this.catservicios[index].Id_Cat_Servicios});
-        //     // }
-        //     // console.log(this.listservicios);
-        // });
     },
 };
 </script>

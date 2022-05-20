@@ -15,7 +15,12 @@
             </div>
             <div class="box2">
                 <li>
-                    <NuxtLink style="color:white" to="/logs">Logs</NuxtLink>
+                    <NuxtLink style="color:white" to="/logs">Logs Servicios</NuxtLink>
+                </li>
+            </div>
+            <div class="box2">
+                <li>
+                    <NuxtLink style="color:white" to="/logst">Logs Tareas</NuxtLink>
                 </li>
             </div>
             <div class="box2">
