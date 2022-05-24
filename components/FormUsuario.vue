@@ -202,6 +202,7 @@ export default {
             allSelected: false,
             indeterminate: false,
 
+            fechaenviar:null,
             listservicios:[],
             tipoadmins: null,
             statusadmin: null,
@@ -289,10 +290,13 @@ export default {
         },
         async setinfo(){
             this.form.servicios=this.selected
-            let resp = `http://127.0.0.1:8000/api/createadmintareas?Id_Status_Admin=${this.form.statusa}&Id_Tipo_Admin=${this.form.tipoa}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Password_Hash=${this.form.pass}&Cant_dias_limit=0&Id_Cat_Tareas=${this.form.servicios}`;
+            let resp = `http://127.0.0.1:8000/api/createadmintareas?Id_Status_Admin=${this.form.statusa}&Id_Tipo_Admin=${this.form.tipoa}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Password_Hash=${this.form.pass}&Cant_dias_limit=0&Id_Cat_Tareas=${this.form.servicios}&Fecha_Ultimo_Cambio_Pass=${this.fechaenviar}`;
             await axios.post(resp).then((data) => {
             // console.log(data);
         });
+        },
+        obtenfecha: function (){
+            return new Date().toLocaleDateString();
         }
     },
     watch: {

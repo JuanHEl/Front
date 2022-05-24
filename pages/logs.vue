@@ -101,7 +101,7 @@ export default {
           sortable: true,
         },
         {
-          key: "Ip_Dispositivo_Orig",
+          key: "IP_Dispositivo_Orig",
           label: "Ip Origen",
           sortable: true,
         },
@@ -111,12 +111,12 @@ export default {
           sortable: true,
         },
         {
-          key: "Ip_Dispositivo_Ant",
+          key: "IP_Dispositivos_Ant",
           label: "Ip inicial",
           sortable: true,
         },
         {
-          key: "Ip_Dispositivo_Desp",
+          key: "IP_Dispositivos_Desp",
           label: "Ip final",
           sortable: true,
         },
@@ -209,13 +209,13 @@ export default {
     buscaporinicio(){
       this.bandera = "fechaI";
       this.limpiar(this.bandera);
-      let fecha = this.logs.filter(x => x.Fecha_Init_Serv == this.form.fechaI );
+      let fecha = this.logs.filter(x => x.Fecha_Init_Serv.split(' ')[0] == this.form.fechaI );
       this.items=fecha;
     },
     buscaporfin(){
       this.bandera = "fechaF";
       this.limpiar(this.bandera);
-      let fecha = this.logs.filter(x => x.Fecha_Fin_Serv == this.form.fechaF );
+      let fecha = this.logs.filter(x => x.Fecha_Fin_Serv.split(' ')[0] == this.form.fechaF );
       this.items=fecha;
     }
   },

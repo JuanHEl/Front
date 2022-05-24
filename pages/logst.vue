@@ -194,15 +194,17 @@ export default {
         buscaporinicio() {
         this.bandera = "fechaI";
         this.limpiar(this.bandera);
+        // console.log(this.form.fechaI)
+        // console.log(this.logs[0].Fecha_Init_Serv.split(' ')[0])
         let fecha = this.logs.filter(
-            (x) => x.Fecha_Init_Serv == this.form.fechaI
+            (x) => x.Fecha_Init_Serv.split(' ')[0] == this.form.fechaI
         );
         this.items = fecha;
         },
         buscaporfin() {
         this.bandera = "fechaF";
         this.limpiar(this.bandera);
-        let fecha = this.logs.filter((x) => x.Fecha_Fin_Serv == this.form.fechaF);
+        let fecha = this.logs.filter((x) => x.Fecha_Fin_Serv.split(' ')[0] == this.form.fechaF);
         this.items = fecha;
         },
     },

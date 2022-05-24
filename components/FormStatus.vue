@@ -130,6 +130,7 @@ export default {
     name: "FormStatus",
     data: function () {
         return {
+            fechaenviar:null,
             bloqueado:true,
             statusadmin: null,
             Listaadmins: null,
@@ -164,10 +165,13 @@ export default {
             this.$router.push("/admins");
         },
         async setinfo(){
-            let resp = `http://127.0.0.1:8000/api/update?Id_Administradores=${this.form.id}&Id_Status_Admin=${this.form.statusa}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Id_Tipo_Admin=${this.logs[0].Id_Tipo_Admin[0].Id_Tipo_Admin}&Password_Hash=${this.logs[0].Password_Hash}&Cant_dias_limit=${this.logs[0].Cant_dias_limit}`;
+            let resp = `http://127.0.0.1:8000/api/update?Id_Administradores=${this.form.id}&Id_Status_Admin=${this.form.statusa}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Id_Tipo_Admin=${this.logs[0].Id_Tipo_Admin[0].Id_Tipo_Admin}&Password_Hash=${this.logs[0].Password_Hash}&Cant_dias_limit=${this.logs[0].Cant_dias_limit}&Fecha_ingreso=${this.fechaenviar}&Fecha_Ultimo_Cambio_Pass=${this.logs[0].Fecha_Ultimo_Cambio_Pass}`;
             await axios.put(resp).then((data) => {
             // console.log(resp);
         });
+        },
+        obtenfecha: function (){
+            return new Date().toLocaleDateString();
         }
     },
     watch: {
@@ -184,6 +188,7 @@ export default {
             // console.log(data);
             this.statusadmin = data.data;
         });
+        this.fechaenviar=this.obtenfecha();
     },
 };
 </script>
