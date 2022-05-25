@@ -1,8 +1,10 @@
 <template>
   <div class="container">
-    <div class="logo">
+    <div class="logo drop">
+      <h1 class="text-white">Bienvenido al Sistema</h1>
+      <b-img src="../assets/logo.png"></b-img>
     </div>
-    <div class=" login">
+    <div class=" login drop">
       <FormLogin/>
     </div>
   </div>
@@ -12,7 +14,7 @@
 import FormLogin from '../components/FormLogin.vue'
 export default {
   name: 'login',
-  layout: 'default',
+  layout: 'principal',
   component: {FormLogin}
 };
 </script>
@@ -30,4 +32,5 @@ export default {
 .container{
   display: flex;
 }
+.drop { filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7)); }
 </style>

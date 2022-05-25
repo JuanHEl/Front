@@ -3,7 +3,7 @@
     <nav>
       <ul>
         <div class="wrapper">
-            <div class="box0">
+            <!-- <div class="box0">
                 <li>
                     <NuxtLink style="color:white" to="/resumen">Resumen</NuxtLink>
                 </li>
@@ -32,7 +32,7 @@
                 <li>
                     <NuxtLink style="color:white" to="/login">Login</NuxtLink>
                 </li>
-            </div>
+            </div> -->
         </div>
       </ul>
     </nav>
@@ -42,7 +42,7 @@
                 <Nuxt />
             </main>
         </div>
-        <div class="col-1">
+        <!-- <div class="col-1">
             <div class="form-check" align="center">
                 <b-form>
                     <b-button class="custom" pill>
@@ -58,7 +58,7 @@
                     </b-button>
                 </b-form>
             </div>
-        </div>
+        </div> -->
     </div>
   </div>
 </template>
