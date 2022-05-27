@@ -61,6 +61,8 @@
 <script>
 import axios from "axios";
 export default {
+    name: 'logst',
+    component: {},
     data() {
         return {
         selected: null,
@@ -95,7 +97,7 @@ export default {
             sortable: true,
             },
             {
-            key: "Ip_Dispositivo_Orig",
+            key: "IP_Dispositivo_Orig",
             label: "Ip Origen",
             sortable: true,
             },

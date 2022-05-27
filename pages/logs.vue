@@ -67,6 +67,8 @@
 <script>
 import axios from "axios";
 export default {
+    name: 'logs',
+    component: {},
   data() {
     return {
       selected: null,

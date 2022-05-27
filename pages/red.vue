@@ -30,6 +30,8 @@
 
 <script>
 export default {
+    name: 'red',
+    component: {},
   data() {
     return {
       seleccion: [0, 0],

@@ -40,7 +40,7 @@ export default {
                 // console.log(data);
                 if (data.data.message == 'Usuario ingresado con éxito') {
                     localStorage.setItem("level", data.data.data.Id_Tipo_Admin); //agregar al localstore
-                    this.$router.push("/home");
+                    this.$router.push("/admins");
                     this.mensaje=data.data.message;
                     // console.log(data.data.message);
                 }else{
