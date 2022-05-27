@@ -2,6 +2,7 @@
     <div id="logs">
         <b-table
         responsive
+        sticky-header
         id="tablalogs"
         striped
         hover
@@ -79,7 +80,7 @@ export default {
             {
             key: "Id_Administradores_Tareas_Log",
             label: "Id",
-            sortable: true,
+            sortable: false,
             },
             {
             key: "Id_Administradores",
@@ -89,37 +90,37 @@ export default {
             {
             key: "Id_Cat_Tareas[0].Nom_Cat_Tareas",
             label: "Tarea",
-            sortable: true,
+            sortable: false,
             },
             {
             key: "Id_Status_Log[0].Nom_Status_Log",
             label: "Estatus",
-            sortable: true,
+            sortable: false,
             },
             {
             key: "IP_Dispositivo_Orig",
             label: "Ip Origen",
-            sortable: true,
+            sortable: false,
             },
             {
             key: "MAC_Dispositivo_Orig",
             label: "MAC Origen",
-            sortable: true,
+            sortable: false,
             },
             {
             key: "Id_Admin_Obj",
             label: "Tarea X",
-            sortable: true,
+            sortable: false,
             },
             {
             key: "Fecha_Init_Serv",
             label: "Fecha inicio",
-            sortable: true,
+            sortable: false,
             },
             {
             key: "Fecha_Fin_Serv",
             label: "Fecha fin",
-            sortable: true,
+            sortable: false,
             },
         ],
         items: [],

@@ -2,6 +2,7 @@
   <div id="logs">
     <b-table
       responsive
+      sticky-header
       id="tablalogs"
       striped
       hover
@@ -85,7 +86,7 @@ export default {
         {
           key: "Id_Administradores_Servicios_Log",
           label: "Id",
-          sortable: true,
+          sortable: false,
         },
         {
           key: "Id_Administradores",
@@ -95,32 +96,32 @@ export default {
         {
           key: "Id_Cat_Servicios[0].Nom_Cat_Servicios",
           label: "Servicio",
-          sortable: true,
+          sortable: false,
         },
         {
           key: "Id_Status_Log[0].Nom_Status_Log",
           label: "Estatus",
-          sortable: true,
+          sortable: false,
         },
         {
           key: "IP_Dispositivo_Orig",
           label: "Ip Origen",
-          sortable: true,
+          sortable: false,
         },
         {
           key: "MAC_Dispositivo_Orig",
           label: "MAC Origen",
-          sortable: true,
+          sortable: false,
         },
         {
           key: "IP_Dispositivos_Ant",
           label: "Ip inicial",
-          sortable: true,
+          sortable: false,
         },
         {
           key: "IP_Dispositivos_Desp",
           label: "Ip final",
-          sortable: true,
+          sortable: false,
         },
         // {
         //   key: "ipFinal",
@@ -130,17 +131,17 @@ export default {
         {
           key: "Dir_MAC_Disp_Fin",
           label: "MAC final",
-          sortable: true,
+          sortable: false,
         },
         {
           key: "Fecha_Init_Serv",
           label: "Fecha inicio",
-          sortable: true,
+          sortable: false,
         },
         {
           key: "Fecha_Fin_Serv",
           label: "Fecha fin",
-          sortable: true,
+          sortable: false,
         }
       ],
       items: [],

@@ -146,8 +146,9 @@ export default {
             });
         },
         async setpermisos(){
+            let adminenuso=localStorage.getItem("id");
             // console.log(this.selected);
-            let resp = `http://127.0.0.1:8000/api/addservicio?lista_insert=${this.selected}&Id_Administrador=${this.form.id}`;
+            let resp = `http://127.0.0.1:8000/api/addservicio?lista_insert=${this.selected}&Id_Administrador=${this.form.id}&id=${adminenuso}`;
             await axios.get(resp).then((data) => {
             // console.log(data);
             });

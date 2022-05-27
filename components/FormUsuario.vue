@@ -219,6 +219,7 @@ export default {
             tipoa: null,
             servicios:null,
         },
+            mensaje:null
         };
     },
     components: {
@@ -289,14 +290,23 @@ export default {
             }
         },
         async setinfo(){
-            this.form.servicios=this.selected
-            let resp = `http://127.0.0.1:8000/api/createadmintareas?Id_Status_Admin=${this.form.statusa}&Id_Tipo_Admin=${this.form.tipoa}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Password_Hash=${this.form.pass}&Cant_dias_limit=0&Id_Cat_Tareas=${this.form.servicios}&Fecha_Ultimo_Cambio_Pass=${this.fechaenviar}`;
+            this.form.servicios=this.selected;
+            let adminenuso=localStorage.getItem("id");
+            let resp = `http://127.0.0.1:8000/api/createadmintareas?Id_Status_Admin=${this.form.statusa}&Id_Tipo_Admin=${this.form.tipoa}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Password_Hash=${this.form.pass}&Cant_dias_limit=0&Id_Cat_Tareas=${this.form.servicios}&Fecha_Ultimo_Cambio_Pass=${this.fechaenviar}&id=${adminenuso}`;
             await axios.post(resp).then((data) => {
-            // console.log(data);
+                this.mensaje=data.data.message;
+            console.log(data.data.message);
         });
         },
         obtenfecha: function (){
             return new Date().toLocaleDateString();
+        },
+        makeToast(variant = null) {
+        this.$bvToast.toast(this.mensaje, {
+            title: "Mensaje",
+            variant: variant,
+            solid: true
+        })
         }
     },
     watch: {

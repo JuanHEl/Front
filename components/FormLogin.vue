@@ -40,13 +40,14 @@ export default {
                 // console.log(data);
                 if (data.data.message == 'Usuario ingresado con éxito') {
                     localStorage.setItem("level", data.data.data.Id_Tipo_Admin); //agregar al localstore
-                    this.$router.push("/admins");
+                    localStorage.setItem("id", data.data.data.Id_Administradores); 
                     this.mensaje=data.data.message;
+                    this.$router.push("/admins");
                     // console.log(data.data.message);
                 }else{
                     this.mensaje=data.data.message;
-                    this.$router.push("/login");
                     this.makeToast('danger');
+                    this.$router.push("/login");
                     // console.log(data.data.message);
                 }
             });
@@ -55,7 +56,8 @@ export default {
         this.$bvToast.toast(this.mensaje, {
             title: "Mensaje",
             variant: variant,
-            solid: true
+            solid: true,
+            delay: 2000 
         })
         }
     },
