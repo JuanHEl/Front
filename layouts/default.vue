@@ -1,34 +1,34 @@
 <template>
-  <div>
-    <nav>
-      <ul>
+  <div class="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <ul class="navbar-nav mr-auto my-2 my-lg-0">
         <div class="wrapper">
-            <div class="box0">
+            <div class="box">
                 <li>
                     <NuxtLink style="color:white" to="/resumen">Resumen</NuxtLink>
                 </li>
             </div>
-            <div class="box2">
+            <div class="box">
                 <li>
                     <NuxtLink style="color:white" to="/admins">Administratores</NuxtLink>
                 </li>
             </div>
-            <div class="box2">
+            <div class="box">
                 <li>
                     <NuxtLink style="color:white" to="/logs">Logs Servicios</NuxtLink>
                 </li>
             </div>
-            <div class="box2">
+            <div class="box">
                 <li>
                     <NuxtLink style="color:white" to="/logst">Logs Tareas</NuxtLink>
                 </li>
             </div>
-            <div class="box2">
+            <div class="box">
                 <li>
                     <NuxtLink style="color:white" to="/red">Red</NuxtLink>
                 </li>
             </div>
-            <div class="box1">
+            <div class="box">
                 <li>
                     <NuxtLink style="color:white" to="/configuracion">Configuración</NuxtLink>
                 </li>
@@ -40,13 +40,40 @@
             </div> -->
         </div>
       </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <b-button type="button" class="btn btn-outline-success my-2 my-sm-0" v-on:click="setinfo" to="/login">
+                <b-icon icon="power" style="color:white">
+                </b-icon>
+              </b-button>
+            </form>
     </nav>
     <main>
       <Nuxt />
     </main>
   </div>
 </template>
-
+<script>
+import axios from "axios";
+export default {
+    data: function () {
+        return {};
+    },
+    components: {},
+    methods: {
+        async setinfo(){
+          let adminenuso=localStorage.getItem("id");
+          let resp = `http://127.0.0.1:8000/api/logout?id=${adminenuso}`;
+          await axios.post(resp).then((data) => {
+            // console.log(resp);
+          });
+          localStorage.removeItem('level');
+          localStorage.removeItem('id');
+        }
+    },
+    watch: {},
+    mounted: function () {},
+};
+</script>
 <style>
 /* home route and active route will show in bold as it matches / and /about */
 a.nuxt-link-active {
@@ -81,6 +108,7 @@ ul {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  width: 90%;
 }
 li {
   margin: 0 0.5rem;
@@ -107,5 +135,16 @@ a:hover {
 .wrapper > div {
     flex: 1;
 }
-
+.header {
+  background-size: cover;
+  min-height: 100vh;
+}
+.header .navbar {
+  background-color: transparent !important;
+}
+.box {
+  width: 180px;
+  /* margin: 10%;
+  padding: 10%; */
+}
 </style>

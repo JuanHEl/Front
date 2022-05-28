@@ -3,7 +3,7 @@
             <div>
             <!-- <Header/>
             <Navbar/> -->
-            <div class="container" style="width:100%; height:30%; overflow-y:scroll">
+            <div class="container" style="width:100%; height:50%; overflow-y:scroll">
             <table class="table table-hover">
                 <thead>
                 <tr class="text-white">
