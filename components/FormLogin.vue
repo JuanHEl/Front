@@ -4,10 +4,10 @@
             <b-card title="Inicio de sesion" body-text-variant="white" style="background-color: #6b123c" class="">
                 <b-form @submit.stop.prevent="loginuser">
                     <b-form-group id="input-group-1" label="Nombre usuario" label-for="input-1">
-                        <b-form-input v-model="usuario.username" id="input-1" type="text" required placeholder="Ingesar nombre de usuario"></b-form-input>
+                        <b-form-input v-model="usuario.username" id="input-1" type="text" required placeholder="Ingresar nombre de usuario"></b-form-input>
                     </b-form-group>
                     <b-form-group id="input-group-2" label="Contraseña" label-for="input-2">
-                        <b-form-input v-model="usuario.password" id="input-2" type="password" required placeholder="Ingresa tu contraseña"></b-form-input>
+                        <b-form-input v-model="usuario.password" id="input-2" type="password" required placeholder="Ingresar contraseña"></b-form-input>
                     </b-form-group>
                     <b-button class="btn btn-primary" variant="primary" type="submit">Iniciar sesión</b-button>
                 </b-form>

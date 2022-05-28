@@ -10,7 +10,7 @@
             </div>
             <div class="box">
                 <li>
-                    <NuxtLink style="color:white" to="/admins">Administratores</NuxtLink>
+                    <NuxtLink style="color:white" to="/admins">Administradores</NuxtLink>
                 </li>
             </div>
             <div class="box">
@@ -30,7 +30,7 @@
             </div>
             <div class="box">
                 <li>
-                    <NuxtLink style="color:white" to="/configuracion">Configuración</NuxtLink>
+                    <NuxtLink style="color:white" to="/configuracion">Configuración Red</NuxtLink>
                 </li>
             </div>
             <!-- <div class="box3">
@@ -40,12 +40,30 @@
             </div> -->
         </div>
       </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <b-button type="button" class="btn btn-outline-success my-2 my-sm-0" v-on:click="setinfo" to="/login">
-                <b-icon icon="power" style="color:white">
-                </b-icon>
-              </b-button>
-            </form>
+      <div class="form-group col-sm-2">
+        <b-dropdown
+          split
+          split-variant="outline-success"
+          variant="success"
+          text="Info"
+          class="m-md-2"
+        >
+          <b-button type="button" class="btn btn-outline-success my-2 my-sm-0" v-on:click="setinfo" to="/login">
+            <b-icon icon="power" style="color:white">
+            </b-icon>Cerrar Sesion
+          </b-button>
+          <b-button type="button" class="btn btn-outline-success my-2 my-sm-0">
+            <b-icon icon="power" style="color:white">
+            </b-icon>Perfil
+          </b-button>
+          <b-button type="button" class="btn btn-outline-success my-2 my-sm-0">
+            <b-icon icon="power" style="color:white">
+            </b-icon>Editar
+          </b-button>
+          <!-- <b-dropdown-item href="#">Perfil</b-dropdown-item>
+          <b-dropdown-item href="#">Editar</b-dropdown-item> -->
+        </b-dropdown>
+      </div>
     </nav>
     <main>
       <Nuxt />
@@ -143,7 +161,7 @@ a:hover {
   background-color: transparent !important;
 }
 .box {
-  width: 180px;
+  width: 195px;
   /* margin: 10%;
   padding: 10%; */
 }
