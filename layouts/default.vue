@@ -56,7 +56,7 @@
             <b-icon icon="power" style="color:white">
             </b-icon>Perfil
           </b-button>
-          <b-button type="button" class="btn btn-outline-success my-2 my-sm-0">
+          <b-button type="button" class="btn btn-outline-success my-2 my-sm-0" to="/perfil">
             <b-icon icon="power" style="color:white">
             </b-icon>Editar
           </b-button>
