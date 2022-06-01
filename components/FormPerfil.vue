@@ -12,6 +12,7 @@
                 name="nombre"
                 id="nombre"
                 v-model="form.nombre"
+                @change="desbloqueo"
                 required
                 />
             </div>
@@ -27,6 +28,7 @@
                 name="nombre"
                 id="nombre"
                 v-model="form.apellidop"
+                @change="desbloqueo"
                 required
                 />
             </div>
@@ -42,6 +44,7 @@
                 name="nombre"
                 id="nombre"
                 v-model="form.apellidom"
+                @change="desbloqueo"
                 required
                 />
             </div>
@@ -57,6 +60,7 @@
                 name="direccion"
                 id="direccion"
                 v-model="form.nombreusuario"
+                @change="desbloqueo"
                 required
                 />
             </div>
@@ -79,6 +83,7 @@
                                             name="correo"
                                             id="correo"
                                             v-model="form.pass"
+                                            @change="desbloqueo"
                                             required
                                         />
                                 </b-input-group>
@@ -106,13 +111,13 @@
                                     name="correo"
                                     id="correo"
                                     v-model="form.pass"
+                                    @change="desbloqueo"
                                 ></b-form-input>
                                 <label for="" class="control-label col-sm-3 text-white"
                                 >Contraseña</label
                                 >
                             </div>
                             <b-button variant="primary" class="mt-3" @click="contra" block>Verificar</b-button>
-                            <b-button variant="primary" class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Cerrar</b-button>
                         </b-modal>
                     </div>
                 <br>
@@ -121,7 +126,7 @@
                 <button type="button" class="btn btn-primary" v-on:click="salir()">
                     Salir
                 </button>
-                <b-button type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setinfo" to="/admins" :disabled="bloqueado">
+                <b-button type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setinfo" to="/perfil" :disabled="bloqueado">
                     Finalizar
                 </b-button>
             </div>
@@ -134,6 +139,7 @@ export default {
     name: "FormPerfil",
     data: function () {
         return {
+            Listaadmins:[],
             step:0,
             showpass:'password',
             icon:'eye-slash',
@@ -148,8 +154,15 @@ export default {
             apellidom: "",
             pass: "",
             nombreusuario: "",
+
+            idstatus:"",
+            idtipo:"",
+            fechaing: "",
+            fcambiopass: "",
+            cantlimdias:""
         },
-        showDismissibleAlert: false
+        showDismissibleAlert: false,
+        mensaje:null
         };
     },
     components: {
@@ -157,10 +170,19 @@ export default {
     methods: {
         async setinfo(){
             let adminenuso=localStorage.getItem("id");
-            let resp = `http://127.0.0.1:8000/api/update?Id_Administradores=${this.form.id}&Id_Status_Admin=${this.logs[0].Id_Status_Admin[0].Id_Status_Admin}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Id_Tipo_Admin=${this.form.tipoa}&Password_Hash=${this.logs[0].Password_Hash}&Cant_dias_limit=${this.logs[0].Cant_dias_limit}&Fecha_ingreso=${this.fechaenviar}&Fecha_Ultimo_Cambio_Pass=${this.logs[0].Fecha_Ultimo_Cambio_Pass}&id=${adminenuso}`;
+            let resp;
+            // console.log(this.logs[0].Password_Hash)
+            if (this.form.pass != this.logs[0].Password_Hash && this.step==1) {
+                resp = `http://127.0.0.1:8000/api/updateperfil?Id_Administradores=${adminenuso}&Id_Status_Admin=${this.logs[0].Id_Status_Admin}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Id_Tipo_Admin=${this.logs[0].Id_Tipo_Admin}&Password_Hash=${this.form.pass}&Cant_dias_limit=${this.logs[0].Cant_dias_limit}&Fecha_ingreso=${this.logs[0].Fecha_ingreso}&Fecha_Ultimo_Cambio_Pass=${this.fechaenviar}&id=${adminenuso}`;
+            }else {
+                resp = `http://127.0.0.1:8000/api/updateperfil?Id_Administradores=${adminenuso}&Id_Status_Admin=${this.logs[0].Id_Status_Admin}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Id_Tipo_Admin=${this.logs[0].Id_Tipo_Admin}&Password_Hash=${this.logs[0].Password_Hash}&Cant_dias_limit=${this.logs[0].Cant_dias_limit}&Fecha_ingreso=${this.logs[0].Fecha_ingreso}&Fecha_Ultimo_Cambio_Pass=${this.logs[0].Fecha_Ultimo_Cambio_Pass}&id=${adminenuso}`;
+            }
+            // console.log(resp)
             await axios.put(resp).then((data) => {
-            // console.log(resp);
-        });
+                    this.mensaje=data.data.message;
+                    // console.log(data.data.message);
+                    this.makeToast('success');
+            });
         },
         salir() {
             this.$router.push("/admins");
@@ -192,12 +214,23 @@ export default {
                 this.showpass = 'password'
                 this.icon = 'eye-slash'
             }
+        },
+        desbloqueo(){
+            this.bloqueado = false;
+        },
+        makeToast(variant = null) {
+        this.$bvToast.toast(this.mensaje, {
+            title: "Mensaje",
+            variant: variant,
+            solid: true
+        })
         }
     },
     watch: {
     },
     mounted: function () {
         let adminenuso=localStorage.getItem("id");
+        // console.log(this.$cookies.get('user').Id_Tipo_Admin)
         // console.log(adminenuso);
         let admin = `http://127.0.0.1:8000/api/show/${adminenuso}`;
         axios.get(admin).then((data) => {
@@ -207,8 +240,9 @@ export default {
             this.form.apellidom=data.data.data[0].Apellido_M_Admin;
             this.form.nombreusuario=data.data.data[0].Nombre_Usuario;
             this.contras=data.data.data[0].Password_Hash;
-            this.Listaadmins = data.data;
+            this.Listaadmins = data.data.data;
             this.logs = this.Listaadmins;
+            // console.log(this.logs[0].Password_Hash)
         });
         this.fechaenviar=this.obtenfecha();
     },

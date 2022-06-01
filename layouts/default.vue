@@ -41,28 +41,30 @@
         </div>
       </ul>
       <div class="form-group col-sm-2">
-        <b-dropdown
-          split
-          split-variant="outline-success"
-          variant="success"
+        <div class="dropdown">
+          <b-button
+          variant="primary"
           text="Info"
           class="m-md-2"
-        >
-          <b-button type="button" class="btn btn-outline-success my-2 my-sm-0" v-on:click="setinfo" to="/login">
-            <b-icon icon="power" style="color:white">
-            </b-icon>Cerrar Sesion
-          </b-button>
-          <b-button type="button" class="btn btn-outline-success my-2 my-sm-0">
-            <b-icon icon="power" style="color:white">
-            </b-icon>Perfil
-          </b-button>
-          <b-button type="button" class="btn btn-outline-success my-2 my-sm-0" to="/perfil">
-            <b-icon icon="power" style="color:white">
-            </b-icon>Editar
-          </b-button>
-          <!-- <b-dropdown-item href="#">Perfil</b-dropdown-item>
-          <b-dropdown-item href="#">Editar</b-dropdown-item> -->
-        </b-dropdown>
+          ><b-icon icon="info-circle" style="color:white">
+              </b-icon></b-button>
+          <div class="dropdown-content">
+            <b-button style="width:100%" variant="primary" class="btn btn-primary" v-on:click="setinfo" to="/login" v-b-tooltip.hover title="Cerrar Sesion">
+              <b-icon icon="power" style="color:white">
+              </b-icon>
+            </b-button>
+            <!-- <b-button type="button" class="btn btn-outline-primary my-2 my-sm-0">
+              <b-icon icon="power" style="color:white">
+              </b-icon>Perfil
+            </b-button> -->
+            <b-button style="width:100%" variant="primary" class="btn btn-primary" to="/perfil" v-b-tooltip.hover title="Editar">
+              <b-icon icon="pencil" style="color:white">
+              </b-icon>
+            </b-button>
+            <!-- <b-dropdown-item href="#">Perfil</b-dropdown-item>
+            <b-dropdown-item href="#">Editar</b-dropdown-item> -->
+          </div>
+        </div>
       </div>
     </nav>
     <main>
@@ -86,6 +88,7 @@ export default {
           });
           localStorage.removeItem('level');
           localStorage.removeItem('id');
+          this.$cookies.remove('user');
         }
     },
     watch: {},
@@ -164,5 +167,29 @@ a:hover {
   width: 195px;
   /* margin: 10%;
   padding: 10%; */
+}
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown-content a {
+  display: block;
+  color: #000000;
+  padding: 5px;
+  background-color: primary;
+  text-decoration: none;
+}
+.dropdown-content a:hover {
+  color: #FFFFFF;
+  background-color: primary;
 }
 </style>

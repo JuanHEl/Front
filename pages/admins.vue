@@ -74,6 +74,7 @@ import axios from "axios";
 import apiTT from "../repositories/Repository";
 export default {
     name: "home",
+    middleware:"session",
     data() {
         return {
             form:{

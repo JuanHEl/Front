@@ -159,6 +159,9 @@
                         </div> -->
                     </div>
                 </div>
+                <div v-if="step==2">
+                    <h1>Hello</h1>
+                </div>
                 <div class="form-group">
                     <button v-if="step==0" type="button" class="btn btn-primary" v-on:click="salir()">
                         Salir
@@ -166,10 +169,16 @@
                     <button v-if="step==1" type="button" class="btn btn-primary" v-on:click="ant">
                         Anterior
                     </button>
+                    <button v-if="step==2" type="button" class="btn btn-primary" v-on:click="ant">
+                        Anterior
+                    </button>
                     <button v-if="step==0" type="button submit" class="btn btn-primary" >
                         Continuar
                     </button>
-                    <b-button v-if="step==1" type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setinfo" to="/admins">
+                    <button v-if="step==1" type="button submit" class="btn btn-primary" >
+                        Continuar
+                    </button>
+                    <b-button v-if="step==2" type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setinfo" to="/admins">
                         Finalizar
                     </b-button>
                 </div>
@@ -263,7 +272,7 @@ export default {
             });
         },
         sig(){
-            if (this.step<1) {
+            if (this.step<2) {
                 this.step++;
             }
         },

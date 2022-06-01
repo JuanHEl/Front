@@ -42,6 +42,11 @@ export default {
                     localStorage.setItem("level", data.data.data.Id_Tipo_Admin); //agregar al localstore
                     localStorage.setItem("id", data.data.data.Id_Administradores); 
                     this.mensaje=data.data.message;
+                    // this.$cookies.set('user',data.data.data);
+                    this.$cookies.set("user",data.data.data,{
+                        path: "/", 
+                        maxAge:60*60*24*7
+                    });
                     this.$router.push("/admins");
                     // console.log(data.data.message);
                 }else{

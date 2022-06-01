@@ -1,3 +1,5 @@
-export default function ({redirect}) {
-    return redirect('/login') 
+export default function ({app,redirect}) {
+    if (!app.$cookies.get('user')) {
+        return redirect('/login')
+    }
 }
