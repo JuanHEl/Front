@@ -76,7 +76,7 @@
 import axios from "axios";
 export default {
     data: function () {
-        return {};
+        return {mensaje:null};
     },
     components: {},
     methods: {
@@ -92,7 +92,29 @@ export default {
         }
     },
     watch: {},
-    mounted: function () {},
+    mounted: function () {
+      let now = new Date();
+      let options = {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+      };
+      let fecha= now.toLocaleString('sv-SE', options); 
+      console.log(this.$cookies.get('user'))
+      if (this.$cookies.get('user').Fecha_Ultimo_Cambio_Pass) {
+        console.log(this.$cookies.get('user').Fecha_Ultimo_Cambio_Pass)
+      }
+      //   (makeToast,variant = null) =>{
+      //     this.$bvToast.toast(this.mensaje, {
+      //       title: "Mensaje",
+      //       variant: variant,
+      //       solid: true,
+      //     })
+      //   };
+      }
 };
 </script>
 <style>

@@ -6,5 +6,6 @@ import FormEditPermisos from '../components/FormEditPermisos';
 export default {
     components: { FormEditPermisos },
     name: 'editarpermisos',
+    middleware:"session",
 };
 </script>

@@ -69,6 +69,7 @@
 import axios from "axios";
 export default {
     name: 'logs',
+    middleware:"session",
     component: {},
   data() {
     return {

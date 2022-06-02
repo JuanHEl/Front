@@ -14,6 +14,7 @@
 <script>
 export default {
     name: 'resumen',
+    middleware:"session",
     component: {},
     data() {
         return {

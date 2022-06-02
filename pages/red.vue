@@ -31,6 +31,7 @@
 <script>
 export default {
     name: 'red',
+    middleware:"session",
     component: {},
   data() {
     return {

@@ -155,11 +155,11 @@ export default {
             pass: "",
             nombreusuario: "",
 
-            idstatus:"",
-            idtipo:"",
-            fechaing: "",
-            fcambiopass: "",
-            cantlimdias:""
+            // idstatus:"",
+            // idtipo:"",
+            // fechaing: "",
+            // fcambiopass: "",
+            // cantlimdias:""
         },
         showDismissibleAlert: false,
         mensaje:null
@@ -171,6 +171,7 @@ export default {
         async setinfo(){
             let adminenuso=localStorage.getItem("id");
             let resp;
+            // console.log(this.fechaenviar)
             // console.log(this.logs[0].Password_Hash)
             if (this.form.pass != this.logs[0].Password_Hash && this.step==1) {
                 resp = `http://127.0.0.1:8000/api/updateperfil?Id_Administradores=${adminenuso}&Id_Status_Admin=${this.logs[0].Id_Status_Admin}&Nombre_Admin=${this.form.nombre}&Apellido_P_Admin=${this.form.apellidop}&Apellido_M_Admin=${this.form.apellidom}&Nombre_Usuario=${this.form.nombreusuario}&Id_Tipo_Admin=${this.logs[0].Id_Tipo_Admin}&Password_Hash=${this.form.pass}&Cant_dias_limit=${this.logs[0].Cant_dias_limit}&Fecha_ingreso=${this.logs[0].Fecha_ingreso}&Fecha_Ultimo_Cambio_Pass=${this.fechaenviar}&id=${adminenuso}`;
@@ -183,12 +184,30 @@ export default {
                     // console.log(data.data.message);
                     this.makeToast('success');
             });
+            this.bloqueado=true;
+            this.showpass='password';
         },
         salir() {
             this.$router.push("/admins");
         },
         obtenfecha: function (){
-            return new Date().toLocaleDateString();
+            // var date = new Date();
+            // const formatDate = (current_datetime)=>{
+            //     let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
+            //     return formatted_date;
+            // }
+            // console.log(formatDate(date));
+            // return formatDate(date);
+            let now = new Date();
+            let options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            return now.toLocaleString('sv-SE', options); 
         },
         contra() {
             if (this.contras==this.form.pass) {

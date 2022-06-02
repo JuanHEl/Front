@@ -17,6 +17,7 @@
 <script>
 export default {
     name: 'configuracion',
+    middleware:"session",
     component: {},
 
 }
