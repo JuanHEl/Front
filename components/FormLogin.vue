@@ -26,7 +26,8 @@ export default {
                 username:null,
                 password:null
             },
-            mensaje:null
+            mensaje:null,
+            id:""
         }
     },
     computed:{
@@ -48,6 +49,7 @@ export default {
                         maxAge:60*60*24*7
                     });
                     this.$router.push("/admins");
+                    this.id=data.data.data.Id_Administradores;
                     // console.log(data.data.message);
                 }else{
                     this.mensaje=data.data.message;
@@ -55,6 +57,15 @@ export default {
                     this.$router.push("/login");
                     // console.log(data.data.message);
                 }
+            });
+            
+            let tipo = `http://127.0.0.1:8000/api/showcattareaa/${this.id}`;
+            await axios.get(tipo).then((data) => {
+                console.log(data.data);
+                this.$cookies.set("tipoa",data.data,{
+                    path: "/", 
+                    maxAge:60*60*24*7
+                });
             });
         },
         makeToast(variant = null) {

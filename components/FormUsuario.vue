@@ -198,22 +198,26 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <!-- <h1 v-if="this.form.tipoa">{{form.tipoa}}</h1> -->
                     <button v-if="step==0" type="button" class="btn btn-primary" v-on:click="salir()">
                         Salir
-                    </button>
-                    <button v-if="step==1" type="button" class="btn btn-primary" v-on:click="ant">
-                        Anterior
-                    </button>
-                    <button v-if="step==2" type="button" class="btn btn-primary" v-on:click="ant">
-                        Anterior
                     </button>
                     <button v-if="step==0" type="button submit" class="btn btn-primary" >
                         Continuar
                     </button>
-                    <button v-if="step==1" type="button submit" class="btn btn-primary" >
+                    <button v-if="step==1" type="button" class="btn btn-primary" v-on:click="ant">
+                        Anterior
+                    </button>
+                    <button v-if="step==1 && form.tipoa==2" type="button submit" class="btn btn-primary" >
                         Continuar
                     </button>
-                    <b-button v-if="step==2" type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setinfo" to="/admins">
+                    <b-button v-if="step==1 && form.tipoa==1" type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setinfo" to="/admins">
+                        Finalizar
+                    </b-button>
+                    <button v-if="step==2 && form.tipoa==2" type="button" class="btn btn-primary" v-on:click="ant">
+                        Anterior
+                    </button>
+                    <b-button v-if="step==2 && form.tipoa==2" type="button" style="color:white" class="btn btn-primary" variant="primary" v-on:click="setinfo" to="/admins">
                         Finalizar
                     </b-button>
                 </div>
@@ -269,7 +273,8 @@ export default {
             servicios:null,
             tareas: null
         },
-            mensaje:null
+            mensaje:null,
+            cookie:null
         };
     },
     components: {
@@ -398,6 +403,7 @@ export default {
         }
     },
     mounted: function () {
+        this.cookie=this.$cookies.set("tipoa");
         let tipoadmin = "http://127.0.0.1:8000/api/muestratipoa";
         axios.get(tipoadmin).then((data) => {
             // console.log(data);

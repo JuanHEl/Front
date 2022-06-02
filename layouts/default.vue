@@ -2,7 +2,10 @@
   <div class="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <ul class="navbar-nav mr-auto my-2 my-lg-0">
-        <div class="wrapper">
+        <div>
+          <h4 style="color:white" v-if="this.nombre">Bienvenido: {{nombre}}</h4>
+        </div>
+        <div class="wrapper my-2">
             <div class="box">
                 <li>
                     <NuxtLink style="color:white" to="/resumen">Resumen</NuxtLink>
@@ -76,7 +79,10 @@
 import axios from "axios";
 export default {
     data: function () {
-        return {mensaje:null};
+        return {
+          nombre:"",
+          mensaje:null
+        };
     },
     components: {},
     methods: {
@@ -93,6 +99,7 @@ export default {
     },
     watch: {},
     mounted: function () {
+      this.nombre=this.$cookies.get('user').Nombre_Usuario;
       let now = new Date();
       let options = {
           year: 'numeric',
@@ -103,9 +110,12 @@ export default {
           second: '2-digit'
       };
       let fecha= now.toLocaleString('sv-SE', options); 
-      console.log(this.$cookies.get('user'))
+      console.log(this.$cookies.get('user'));
       if (this.$cookies.get('user').Fecha_Ultimo_Cambio_Pass) {
+        console.log('Usuario')
         console.log(this.$cookies.get('user').Fecha_Ultimo_Cambio_Pass)
+        console.log('actual')
+        console.log(fecha)
       }
       //   (makeToast,variant = null) =>{
       //     this.$bvToast.toast(this.mensaje, {
