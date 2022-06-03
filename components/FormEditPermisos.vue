@@ -70,13 +70,15 @@
             </div>
         </div>
         <div id="botones">
-            <div>
-                <br>
-                <b-button block class="buttons" pill variant="primary" to="/nuevoadmin" font-scale="3"> Agregar Nuevo Administrador</b-button>
-                <b-button block class="buttons" pill variant="primary" to="cambiastatus" font-scale="3"> Cambiar Status </b-button>
-                <b-button block class="buttons" pill variant="primary" to="/editaradmin" font-scale="3"> Editar Administrador</b-button>
-                <br>
-                <b-button block class="buttons" pill variant="primary" to="/editarpermisos" font-scale="3"> Editar Permisos</b-button>
+            <div v-for="tarea in tareaa" :key="tarea">
+                <b-button v-if="tarea==4" block class="buttons" pill variant="primary" to="/nuevoadmin" font-scale="3"> Agregar Nuevo Administrador</b-button>
+                <br v-if="tarea==4">
+                <b-button v-if="tarea==6" block class="buttons" pill variant="primary" to="/cambiastatus" font-scale="3"> Cambiar Status </b-button>
+                <br v-if="tarea==6">
+                <b-button v-if="tarea==5" block class="buttons" pill variant="primary" to="/editaradmin" font-scale="3"> Editar Administrador</b-button>
+                <br v-if="tarea==5">
+                <b-button v-if="tarea==8 || tarea==7" block class="buttons" pill variant="primary" to="/editarpermisos" font-scale="3"> Editar Permisos</b-button>
+                <br v-if="tarea==8 || tarea==7">
             </div>
         </div>
     </div>
@@ -95,7 +97,8 @@ export default {
             nombrecompleto:null,
             form: {
                 id: "",
-            }
+            },
+            tareaa:[]
         };
     },
     components: {
@@ -179,6 +182,15 @@ export default {
             }
             // console.log(this.listservicios);
         });
+        let tareaa=this.$cookies.get("tipoa").admins;
+        // console.log(tareaa)
+        if (tareaa.length) {
+            for (let index = 0; index < tareaa.length; index++) {
+                const element = tareaa[index];
+                this.tareaa.push(element.tareaenadmin);
+                // console.log(element.tareaenadmin)
+            }
+        }
     },
 };
 </script>

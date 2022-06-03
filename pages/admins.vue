@@ -49,11 +49,16 @@
                         />
                 </b-input-group>
                 <p></p>
-                <b-button block class="buttons" pill variant="primary" to="/nuevoadmin" font-scale="3"> Agregar Nuevo Administrador</b-button>
-                <b-button block class="buttons" pill variant="primary" to="/cambiastatus" font-scale="3"> Cambiar Status </b-button>
-                <b-button block class="buttons" pill variant="primary" to="/editaradmin" font-scale="3"> Editar Administrador</b-button>
-                <br>
-                <b-button block class="buttons" pill variant="primary" to="/editarpermisos" font-scale="3"> Editar Permisos</b-button>
+                <div v-for="(tarea,index) in tareaa" :key="index">
+                    <b-button v-if="tarea==4" block class="buttons" pill variant="primary" to="/nuevoadmin" font-scale="3"> Agregar Nuevo Administrador</b-button>
+                    <br v-if="tarea==4">
+                    <b-button v-if="tarea==6" block class="buttons" pill variant="primary" to="/cambiastatus" font-scale="3"> Cambiar Status </b-button>
+                    <br v-if="tarea==6">
+                    <b-button v-if="tarea==5" block class="buttons" pill variant="primary" to="/editaradmin" font-scale="3"> Editar Administrador</b-button>
+                    <br v-if="tarea==5">
+                    <b-button v-if="tarea>7" block class="buttons" pill variant="primary" to="/editarpermisos" font-scale="3">Editar Permisos</b-button>
+                    <br v-if="tarea>7">
+                </div>
             </div>
             <!-- <b-form-input
             v-model="form.nombe"
@@ -81,6 +86,7 @@ export default {
                 nombe: ""
             },
             Listaadmins: null,
+            tareaa:[],
             logs:[]
         };
     },
@@ -96,6 +102,19 @@ export default {
         Header,
     },
     mounted: function () {
+        let tareaa=this.$cookies.get("tipoa").admins;
+        // console.log(tareaa)
+        if (tareaa.length) {
+            for (let index = 0; index < tareaa.length; index++) {
+                const element = tareaa[index];
+                this.tareaa.push(element.tareaenadmin);
+                if(tareaa[index].tareaenadmin==7) {
+                    break;
+                }
+                // console.log(element.tareaenadmin)
+            }
+            // console.log(this.tareaa)
+        }
         let admin = "http://127.0.0.1:8000/api/muestra";
         axios.get(admin).then((data) => {
             // console.log(data);

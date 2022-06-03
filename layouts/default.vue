@@ -95,6 +95,8 @@ export default {
           localStorage.removeItem('level');
           localStorage.removeItem('id');
           this.$cookies.remove('user');
+          this.$cookies.remove('tareaa');
+          this.$cookies.remove('tipoa');
         }
     },
     watch: {},
@@ -110,12 +112,12 @@ export default {
           second: '2-digit'
       };
       let fecha= now.toLocaleString('sv-SE', options); 
-      console.log(this.$cookies.get('user'));
+      // console.log(this.$cookies.get('user'));
       if (this.$cookies.get('user').Fecha_Ultimo_Cambio_Pass) {
-        console.log('Usuario')
-        console.log(this.$cookies.get('user').Fecha_Ultimo_Cambio_Pass)
-        console.log('actual')
-        console.log(fecha)
+        // console.log('Usuario')
+        // console.log(this.$cookies.get('user').Fecha_Ultimo_Cambio_Pass)
+        // console.log('actual')
+        // console.log(fecha)
       }
       //   (makeToast,variant = null) =>{
       //     this.$bvToast.toast(this.mensaje, {

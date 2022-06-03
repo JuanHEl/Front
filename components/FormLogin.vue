@@ -48,7 +48,6 @@ export default {
                         path: "/", 
                         maxAge:60*60*24*7
                     });
-                    this.$router.push("/admins");
                     this.id=data.data.data.Id_Administradores;
                     // console.log(data.data.message);
                 }else{
@@ -62,14 +61,26 @@ export default {
                 let tipo = `http://127.0.0.1:8000/api/showcattareaa/${this.id}`;
                 await axios.get(tipo).then((data) => {
                     if (data.data) {
-                        console.log(data.data);
+                        // console.log(data.data);
                         this.$cookies.set("tipoa",data.data,{
                             path: "/", 
                             maxAge:60*60*24*7
                         });  
                     }
                 });
+                let tarea = `http://127.0.0.1:8000/api/showcatservicioa/${this.id}`;
+                await axios.get(tarea).then((data) => {
+                    if (data.data) {
+                        // console.log("tareaa:");
+                        // console.log(data.data);
+                        this.$cookies.set("tareaa",data.data,{
+                            path: "/", 
+                            maxAge:60*60*24*7
+                        });  
+                    }
+                });
             }
+            this.$router.push("/admins");
         },
         makeToast(variant = null) {
         this.$bvToast.toast(this.mensaje, {
