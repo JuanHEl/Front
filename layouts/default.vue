@@ -2,7 +2,7 @@
   <div class="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <ul class="navbar-nav mr-auto my-2 my-lg-0">
-        <div>
+        <div class="my-2">
           <h4 style="color:white" v-if="this.nombre">Bienvenido: {{nombre}}</h4>
         </div>
         <div class="wrapper my-2">

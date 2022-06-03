@@ -58,15 +58,18 @@ export default {
                     // console.log(data.data.message);
                 }
             });
-            
-            let tipo = `http://127.0.0.1:8000/api/showcattareaa/${this.id}`;
-            await axios.get(tipo).then((data) => {
-                console.log(data.data);
-                this.$cookies.set("tipoa",data.data,{
-                    path: "/", 
-                    maxAge:60*60*24*7
+            if (this.id) {
+                let tipo = `http://127.0.0.1:8000/api/showcattareaa/${this.id}`;
+                await axios.get(tipo).then((data) => {
+                    if (data.data) {
+                        console.log(data.data);
+                        this.$cookies.set("tipoa",data.data,{
+                            path: "/", 
+                            maxAge:60*60*24*7
+                        });  
+                    }
                 });
-            });
+            }
         },
         makeToast(variant = null) {
         this.$bvToast.toast(this.mensaje, {
