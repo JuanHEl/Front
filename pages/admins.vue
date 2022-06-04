@@ -50,14 +50,15 @@
                 </b-input-group>
                 <p></p>
                 <div v-for="(tarea,index) in tareaa" :key="index">
+                <!-- <h1>{{tarea}}</h1> -->
                     <b-button v-if="tarea==4" block class="buttons" pill variant="primary" to="/nuevoadmin" font-scale="3"> Agregar Nuevo Administrador</b-button>
                     <br v-if="tarea==4">
                     <b-button v-if="tarea==6" block class="buttons" pill variant="primary" to="/cambiastatus" font-scale="3"> Cambiar Status </b-button>
                     <br v-if="tarea==6">
                     <b-button v-if="tarea==5" block class="buttons" pill variant="primary" to="/editaradmin" font-scale="3"> Editar Administrador</b-button>
                     <br v-if="tarea==5">
-                    <b-button v-if="tarea>7" block class="buttons" pill variant="primary" to="/editarpermisos" font-scale="3">Editar Permisos</b-button>
-                    <br v-if="tarea>7">
+                    <b-button v-if="tarea>=7" block class="buttons" pill variant="primary" to="/editarpermisos" font-scale="3">Editar Permisos</b-button>
+                    <br v-if="tarea>=7">
                 </div>
             </div>
             <!-- <b-form-input
