@@ -73,7 +73,14 @@
     <main>
       <Nuxt />
     </main>
-  </div>
+    <v-idle
+      @idle="onidle"
+      @remind="onremind"
+      :loop="true"
+      :reminders="[20]"
+      :wait="5"
+      :duration="120"/>
+    </div>
 </template>
 <script>
 import axios from "axios";
@@ -97,6 +104,32 @@ export default {
           this.$cookies.remove('user');
           this.$cookies.remove('tareaa');
           this.$cookies.remove('tipoa');
+          location.reload();
+        },
+        onidle() {
+          this.setinfo();
+          // alert('You have been logged out');
+        },
+        onremind(time) {
+          // alert seconds remaining to 00:00
+          // alert(time);
+          this.makeToast('danger',time);
+        },
+        makeToast(variant = danger, time) {
+        this.$bvToast.toast("Se ha detectado inactividad durante "+time+" segundos", {
+            title: "Mensaje",
+            variant: variant,
+            solid: true,
+            delay: 2000 
+        })
+        },
+        makeToast2(variant = warning) {
+        this.$bvToast.toast(this.mensaje, {
+            title: "Seguridad de la cuenta",
+            variant: variant,
+            solid: true,
+            delay: 2000 
+        })
         }
     },
     watch: {},
@@ -112,12 +145,37 @@ export default {
           second: '2-digit'
       };
       let fecha= now.toLocaleString('sv-SE', options); 
-      // console.log(this.$cookies.get('user'));
-      if (this.$cookies.get('user').Fecha_Ultimo_Cambio_Pass) {
+      // console.log(this.$cookies.get('user').Fecha_Ultimo_Cambio_Pass == 'null' ? 'es null': 'no es null');
+      if(this.$cookies.get('user').Fecha_Ultimo_Cambio_Pass != 'null') {
         // console.log('Usuario')
         // console.log(this.$cookies.get('user').Fecha_Ultimo_Cambio_Pass)
         // console.log('actual')
         // console.log(fecha)
+        let ultimocambio = this.$cookies.get('user').Fecha_Ultimo_Cambio_Pass.split(' ')
+        let actual = fecha.split(' ')
+        // console.log(ultimocambio[0])
+        // console.log(actual[0])
+        if (actual[0]>ultimocambio[0]) {
+          // console.log('Ya pasó un buen')
+          let fecha1 = new Date(actual[0]);
+          let fecha2 = new Date(ultimocambio[0]);
+          let istime = (fecha1-fecha2)/(1000*60*60*24)
+          // console.log((fecha1-fecha2)/(1000*60*60*24))
+          if(istime>5) {
+            // console.log('Ya debes cambiar contraseña')
+            this.mensaje="Lleva "+istime+" días sin cambiar tu contraseña, sugerimos actualizarla"
+            this.makeToast2('warning');
+          }
+          // else{
+          //   console.log(istime)
+          //   this.mensaje="Lleva "+istime+" días sin cambiar tu contraseña, sugerimos actualizarla"
+          //   this.makeToast2('warning');
+          // }
+        }
+      }else{
+        // console.log('No tengo contraseña')
+        this.mensaje="Por favor cambia tu contraseña de acceso"
+        this.makeToast2('warning');
       }
       //   (makeToast,variant = null) =>{
       //     this.$bvToast.toast(this.mensaje, {

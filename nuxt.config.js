@@ -23,7 +23,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/bootstrap.js'
+    '~/plugins/bootstrap.js',
+    '~/plugins/vidle.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
