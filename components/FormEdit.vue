@@ -212,6 +212,7 @@ export default {
         });
         this.fechaenviar=this.obtenfecha();
         let tareaa=this.$cookies.get("tipoa").admins;
+        tareaa.sort(function(a, b){return a - b}); 
         // console.log(tareaa)
         if (tareaa.length) {
             for (let index = 0; index < tareaa.length; index++) {

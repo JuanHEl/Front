@@ -436,6 +436,7 @@ export default {
             // console.log(this.listtareas);
         });
         let tareaa=this.$cookies.get("tipoa").admins;
+        tareaa.sort(function(a, b){return a - b}); 
         // console.log(tareaa.length)
         if (tareaa.length) {
             for (let index = 0; index < tareaa.length; index++) {

@@ -116,7 +116,7 @@ export default {
           this.makeToast('danger',time);
         },
         makeToast(variant = danger, time) {
-        this.$bvToast.toast("Se ha detectado inactividad durante "+time+" segundos", {
+        this.$bvToast.toast("Se ha detectado inactividad, saldrás del sistema en "+time+" segundos", {
             title: "Mensaje",
             variant: variant,
             solid: true,
