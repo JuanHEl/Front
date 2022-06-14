@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     name: 'resumen',
     middleware:"session",
@@ -40,7 +41,7 @@ export default {
             sortable: true,
             },
             {
-            key: "AnchoB ",
+            key: "AnchoB",
             label: "Ancho de Banda",
             sortable: true,
             },
@@ -50,16 +51,24 @@ export default {
             sortable: true,
             },
             {
-            key: "SegData",
-            label: "Segmento de datos",
+            key: "IPDispositivo",
+            label: "Ip del Dispositivo",
             sortable: true,
             }
         ],
         items: [],
+        logs: [],
         }
     },
     methods: {},
-    mounted: function () {}
+    mounted: function () {
+        let disp = "http://127.0.0.1:8000/api/dipositivo";
+        axios.get(disp).then((data) => {
+            this.logs = data.data;
+            console.log(this.logs.data);
+            this.items = this.logs.data;
+        });
+    }
 }
 </script>
 

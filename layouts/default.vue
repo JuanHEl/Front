@@ -35,7 +35,7 @@
                 <li>
                     <NuxtLink style="color:white" to="/configuracion">Configuración Red</NuxtLink>
                 </li>
-            </div>
+            </div> -->
             <!-- <div class="box3">
                 <li>
                     <NuxtLink style="color:white" to="/login">Login</NuxtLink>
