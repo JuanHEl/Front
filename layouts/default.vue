@@ -26,11 +26,11 @@
                     <NuxtLink style="color:white" to="/logst">Logs Tareas</NuxtLink>
                 </li>
             </div>
-            <div class="box">
+            <!-- <div class="box">
                 <li>
                     <NuxtLink style="color:white" to="/red">Red</NuxtLink>
                 </li>
-            </div>
+            </div> -->
             <div class="box">
                 <li>
                     <NuxtLink style="color:white" to="/configuracion">Configuración Red</NuxtLink>
