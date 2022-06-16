@@ -49,6 +49,7 @@
                         />
                 </b-input-group>
                 <p></p>
+                <h1 v-if="tareaa.length==0" class="text-white">No tienes permisos para modificar</h1>
                 <div v-for="(tarea,index) in tareaa" :key="index">
                 <!-- <h1>{{tarea}}</h1> -->
                     <b-button v-if="tarea==4" block class="buttons" pill variant="primary" to="/nuevoadmin" font-scale="3"> Agregar Nuevo Administrador</b-button>

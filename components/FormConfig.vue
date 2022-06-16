@@ -1,5 +1,6 @@
 <template>
     <div class="">
+        <h1 v-if="permisos.length==0" class="text-white">No tienes permisos para configurar la RED</h1>
         <div v-for="permiso in permisos" :key="permiso">
 
             <div align="center" class="center" style="width: 50%" v-if="permiso==2">

@@ -1,10 +1,54 @@
 <template>
+<div>
+  <div>
+    <b-navbar toggleable="sm" type="light" variant="dark">
+      <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
+          <p style="color:white">Tiempo de inactividad: <v-idle
+            class="text-white"
+            @idle="onidle"
+            @remind="onremind"
+            :loop="true"
+            :reminders="[20]"
+            :wait="5"
+            :duration="120"/></p>
+          
+          <div class="my-2">
+          </div>
+      <b-collapse id="nav-text-collapse" is-nav>
+        <b-navbar-nav>
+            <h4 style="color:white" v-if="this.nombre">Bienvenido: {{nombre}}</h4>
+        </b-navbar-nav>
+            <b-nav-item-dropdown text="Perfil" right class="text-white">
+            <b-dropdown-item style="width:100%" v-on:click="setinfo" to="/login" v-b-tooltip.hover title="Cerrar Sesion"><b-icon icon="power" style="color:black">
+              </b-icon></b-dropdown-item>
+            <b-dropdown-item style="width:100%" v-b-tooltip.hover title="Editar" to="/perfil"><b-icon icon="pencil" style="color:black">
+              </b-icon></b-dropdown-item>
+      </b-nav-item-dropdown>
+      </b-collapse>
+      <!-- <div class="form-group col-sm-2">
+        <div class="dropdown">
+          <b-button
+          variant="primary"
+          text="Info"
+          class="m-md-2"
+          >Perfil</b-button>
+          <div class="dropdown-content">
+            <b-button style="width:100%" variant="primary" class="btn btn-primary" v-on:click="setinfo" to="/login" v-b-tooltip.hover title="Cerrar Sesion">
+              <b-icon icon="power" style="color:white">
+              </b-icon>
+            </b-button>
+            <b-button style="width:100%" variant="primary" class="btn btn-primary" to="/perfil" v-b-tooltip.hover title="Editar">
+              
+            </b-button>
+          </div>
+        </div>
+      </div> -->
+    </b-navbar>
+  </div>
+
   <div class="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <ul class="navbar-nav mr-auto my-2 my-lg-0">
-        <div class="my-2">
-          <h4 style="color:white" v-if="this.nombre">Bienvenido: {{nombre}}</h4>
-        </div>
         <div class="wrapper my-2">
             <div class="box">
                 <li>
@@ -35,7 +79,7 @@
                 <li>
                     <NuxtLink style="color:white" to="/configuracion">Configuración Red</NuxtLink>
                 </li>
-            </div> -->
+            </div> 
             <!-- <div class="box3">
                 <li>
                     <NuxtLink style="color:white" to="/login">Login</NuxtLink>
@@ -43,44 +87,13 @@
             </div> -->
         </div>
       </ul>
-      <div class="form-group col-sm-2">
-        <div class="dropdown">
-          <b-button
-          variant="primary"
-          text="Info"
-          class="m-md-2"
-          ><b-icon icon="info-circle" style="color:white">
-              </b-icon></b-button>
-          <div class="dropdown-content">
-            <b-button style="width:100%" variant="primary" class="btn btn-primary" v-on:click="setinfo" to="/login" v-b-tooltip.hover title="Cerrar Sesion">
-              <b-icon icon="power" style="color:white">
-              </b-icon>
-            </b-button>
-            <!-- <b-button type="button" class="btn btn-outline-primary my-2 my-sm-0">
-              <b-icon icon="power" style="color:white">
-              </b-icon>Perfil
-            </b-button> -->
-            <b-button style="width:100%" variant="primary" class="btn btn-primary" to="/perfil" v-b-tooltip.hover title="Editar">
-              <b-icon icon="pencil" style="color:white">
-              </b-icon>
-            </b-button>
-            <!-- <b-dropdown-item href="#">Perfil</b-dropdown-item>
-            <b-dropdown-item href="#">Editar</b-dropdown-item> -->
-          </div>
-        </div>
-      </div>
     </nav>
     <main>
       <Nuxt />
     </main>
-    <v-idle
-      @idle="onidle"
-      @remind="onremind"
-      :loop="true"
-      :reminders="[20]"
-      :wait="5"
-      :duration="120"/>
     </div>
+
+</div>
 </template>
 <script>
 import axios from "axios";
