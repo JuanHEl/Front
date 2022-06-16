@@ -3,15 +3,23 @@
   <div>
     <b-navbar toggleable="sm" type="light" variant="dark">
       <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
-          <p style="color:white">Tiempo de inactividad: <v-idle
-            class="text-white"
-            @idle="onidle"
-            @remind="onremind"
-            :loop="true"
-            :reminders="[20]"
-            :wait="5"
-            :duration="120"/></p>
-          
+      <!-- <div> -->
+        <div style="border-style: solid; border-color: #FFFFFF">
+            <p style="color:white; font-size:10px">&nbsp;Inactivo&nbsp;<v-idle
+              style="color:white; font-size:10px"
+              class="text-white"
+              @idle="onidle"
+              @remind="onremind"
+              :loop="true"
+              :reminders="[20]"
+              :wait="5"
+              :duration="120"/></p>
+        </div>
+        <div style="border-style: solid; border-color: #FFFFFF">
+          <p style="color:white; font-size:10px">&nbsp;Sistema&nbsp;
+          <vue-time style="color:white; font-size:10px" :show-date="showDate" :show-day="showDay" :show-time="showTime" :options="options"></vue-time></p>
+        </div>
+      <!-- </div> -->
           <div class="my-2">
           </div>
       <b-collapse id="nav-text-collapse" is-nav>
@@ -45,9 +53,15 @@
       </div> -->
     </b-navbar>
   </div>
-
+  <nav class="nav nav-pills nav-justified" style="font-size:25px">
+    <a class="nav-item nav-link"><NuxtLink style="color:white" to="/resumen">Resumen</NuxtLink></a>
+    <a class="nav-item nav-link"><NuxtLink style="color:white" to="/admins">Administradores</NuxtLink></a>
+    <a class="nav-item nav-link"><NuxtLink style="color:white" to="/logs">Logs Servicios</NuxtLink></a>
+    <a class="nav-item nav-link"><NuxtLink style="color:white" to="/logst">Logs Tareas</NuxtLink></a>
+    <a class="nav-item nav-link"><NuxtLink style="color:white" to="/configuracion">Configuración Red</NuxtLink></a>
+  </nav>
   <div class="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <ul class="navbar-nav mr-auto my-2 my-lg-0">
         <div class="wrapper my-2">
             <div class="box">
@@ -70,24 +84,14 @@
                     <NuxtLink style="color:white" to="/logst">Logs Tareas</NuxtLink>
                 </li>
             </div>
-            <!-- <div class="box">
-                <li>
-                    <NuxtLink style="color:white" to="/red">Red</NuxtLink>
-                </li>
-            </div> -->
             <div class="box">
                 <li>
                     <NuxtLink style="color:white" to="/configuracion">Configuración Red</NuxtLink>
                 </li>
-            </div> 
-            <!-- <div class="box3">
-                <li>
-                    <NuxtLink style="color:white" to="/login">Login</NuxtLink>
-                </li>
-            </div> -->
+            </div>
         </div>
       </ul>
-    </nav>
+    </nav> -->
     <main>
       <Nuxt />
     </main>
@@ -101,7 +105,19 @@ export default {
     data: function () {
         return {
           nombre:"",
-          mensaje:null
+          mensaje:null,
+          showDate: false,
+          showDay: false,
+          showTime: true,
+          options: {
+            hour12: false,
+            timeZone: 'America/Mexico_City',
+            era: 'long',
+            weekday: 'long',
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric'
+          }
         };
     },
     components: {},
